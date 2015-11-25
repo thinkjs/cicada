@@ -2,6 +2,7 @@
 
 import url from 'url';
 import request from 'request';
+import path from 'path';
 import iconvLite from 'iconv-lite';
 
 /**
@@ -104,16 +105,17 @@ export default class extends think.service.base {
    * @param {String} content []
    */
   setBaseMeta(content){
+    let prefix = this.url;
     let urlInfo = url.parse(this.url);
-    let prefix = `${urlInfo.protocol}//${urlInfo.host}/`;
     let reg = /<base [^<>]*href=([\'\"]?)([^\'\"]+)\1[^<>]*>/i;
     let matches = content.match(reg);
     if(matches){
       let href = matches[2].toLowerCase();
       if(href.indexOf('http://') === 0 || href.indexOf('https://') === 0 || href.indexOf('//') === 0){
         prefix = href;
-      }else if(href !== '/'){
-        prefix += href;
+      }else if(href){
+        let value = path.resolve(urlInfo.pathname, href);
+        prefix = urlInfo.protocol + '//' + urlInfo.host + value;
       }
       content = content.replace(reg, '');
     }

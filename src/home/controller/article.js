@@ -82,7 +82,7 @@ export default class extends Base {
     let content = snap[field];
     this.assign('content', content);
     this.assign('info', info);
-    this.assign('prefix', (this.config('protocal') || 'http') + '://' + this.http.host);
+    this.assign('prefix', (this.config('protocol') || 'http') + '://' + this.http.host);
     this.display();
   }
 }
