@@ -11,8 +11,8 @@ body{background-color: #eee}
 .container{width: 900px;background-color: #fff;padding: 0 80px;padding-bottom: 80px;}
 h1{font-size: 40px !important;text-align: center;padding-bottom: 40px;padding-top: 40px;}
 h2,.h2{font-size: 28px;border-bottom: 1px dashed #ddd;line-height: 36px;padding-bottom: 5px;}
-.cicada-list a{color: #666}
-.cicada-list a:hover{text-decoration: none;color: #337ab7}
+.cicada-list a, h1 a{color: #666}
+.cicada-list a:hover, h1 a:hover{text-decoration: none;color: #337ab7}
 time{font-style: italic;color: #999}
 p.datetime{font-size: 14px;}
 p.summary{margin-top: 10px;}
@@ -25,7 +25,7 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
 </head>
 <body role="document">
   <div class="container theme-showcase" role="main">
-    <h1><%-config.website_title%></h1>
+    <h1><a href="/"><%-config.website_title%></a></h1>
     <form class="form-inline search-form" style="text-align:center" action="/" method="get">
       <div class="form-group">
         <input type="text" name="keyword" value="<%=http.get('keyword')%>" class="form-control" placeholder="请输入搜索关键字" style="width:300px;">
