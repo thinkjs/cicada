@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{padding: 0;margin: 0}
+header.snapshot{
+  background: #FFF;
+  position: relative;
+  text-align: left;
+  z-index: 9999;
+  border-bottom: 1px solid #ACA899;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+header.snapshot a{color: blue;text-decoration: none;}
+</style>
+</head>
+<body>
+  <header class="snapshot">
+    下面是原始网页 <a href="<%-info.url%>"><%-info.url%></a> 在 <%-getFormatDate(info.create_time)%> 的快照。<%-http.host%> 与该网页作者无关，不对其内容负责。切换到
+    <%if(http.get('type') == 'clean'){%>
+      <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>">完整版</a>
+    <%}else{%>
+      <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>&type=clean">简洁版</a>
+    <%}%>
+  </header>
+  <div class="snapshot-content">
+    <%-content%>
+  </div>
+</body>
+</html>

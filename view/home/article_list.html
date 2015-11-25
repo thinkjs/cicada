@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>welefen 的收藏</title>
+<link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet">
+<style>
+body{background-color: #eee}
+.container{width: 900px;background-color: #fff;padding: 0 80px;padding-bottom: 80px;}
+h1{font-size: 40px !important;text-align: center;padding-bottom: 50px;padding-top: 40px;}
+h2,.h2{font-size: 28px;border-bottom: 1px dashed #ddd;line-height: 36px;padding-bottom: 5px;}
+.cicada-list a{color: #666}
+.cicada-list a:hover{text-decoration: none;color: #337ab7}
+time{font-style: italic;color: #999}
+p.datetime{font-size: 14px;}
+p.summary{margin-top: 10px;}
+p.snapshot{font-size: 14px;}
+p a{border-bottom: 1px dashed #888;padding-bottom: 1px;}
+div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
+</style>
+</head>
+<body role="document">
+  <div class="container theme-showcase" role="main">
+    <h1>welefen 的收藏</h1>
+    <div class="rows cicada-list">
+      <%articleList.data.forEach(function(item){%>
+      <div class="article-item">
+        <h2><a href="<%=item.url%>" target="_blank"><%=item.title%></a></h2>
+        <p class="datetime">收藏于：<time><%-getFormatDate(item.create_time)%></time></p>
+        <p class="summary"><%-item.summary.replace(/\n/g, '<br />')%></p>
+        <%if(!think.isEmpty(item.tag)){%>
+          <p class="tags">
+            标签：<%item.tag.forEach(function(tag){%>
+            <%=tag.name%>
+            <%})%>
+          </p>
+          <%}%>
+        <p class="snapshot">
+          <a href="<%=item.url%>" target="_blank">查看原文</a> | 
+          查看快照：<a target="_blank" href="/article/snapshot?id=<%-item.id%>">完整版</a>, <a href="/article/snapshot?id=<%-item.id%>&type=clean" target="_blank">简洁版</a>
+        </p>
+      </div>
+      <%})%>
+    </div>
+  </div>
+</body>
+</html>

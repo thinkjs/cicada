@@ -3,5 +3,5 @@
  * config
  */
 export default {
-  //key: value
+  token: 'TOKEN_VALUE'
 };

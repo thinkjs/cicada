@@ -10,3 +10,8 @@
  *     
  * }
  */
+import moment from 'moment';
+
+global.getFormatDate = datetime => {
+  return moment(datetime).format('YYYY-MM-DD HH:mm:ss');
+}
