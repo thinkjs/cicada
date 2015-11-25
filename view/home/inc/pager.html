@@ -35,14 +35,28 @@ if(!pageUrl){
     <li class="prev"><a href="<%=pageUrl.replace('${page}', pagerData.currentPage - 1)%>">上一页</a></li>
   <% } %>
   <% 
-    var num = pagerData.pageNum || 3;
-      var pageIndex = [];
-      var page = pagerData.currentPage | 0 || 1;
-      for (var i = page - num; i <= page + num; i++) {
-          if (i >= 1 && i <= pagerData.totalPages) {
-              pageIndex.push(i);
-          };
+    var num = pagerData.pageNum || 2;
+    var page = pagerData.currentPage | 0 || 1;
+    var totalPages = pagerData.totalPages;
+    var pageIndex = [];
+    var start = page - num;
+    var stop = page + num;
+
+    if(start <= 1) {
+      start = 1;
+      stop = start + num * 2 + 1;
+    }
+
+    if(stop >= totalPages) {
+      stop = totalPages;
+      start = totalPages - num * 2 - 1;
+    }
+
+    for (var i = start; i <= stop; i++) {
+      if (i >= 1 && i <= totalPages) {
+        pageIndex.push(i);
       }
+    }
     %>
     <% if(pageIndex[0] > 1){ %>
     <li><a href="<%=pageUrl.replace('${page}', 1)%>">1</a></li>
