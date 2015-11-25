@@ -7,5 +7,8 @@ export default {
         cache_compile: true
       }
     }
+  },
+  db: {
+    log_sql: false
   }
 };
