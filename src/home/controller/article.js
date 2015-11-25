@@ -12,7 +12,11 @@ export default class extends Base {
     let where = {};
     let keyword = this.get('keyword');
     if(keyword){
-      where.title = ['LIKE', `%${keyword}%`];
+      where = {
+        title: ['LIKE', `%${keyword}%`],
+        summary: ['LIKE', `%${keyword}%`],
+        _logic: 'OR'
+      }
     }
     let data = await this.model('article').order('id DESC').setRelation('tag').where(where).page(this.get('page'), 10).countSelect(true);
     this.assign('articleList', data);
