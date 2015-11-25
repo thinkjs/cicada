@@ -1,0 +1,78 @@
+<%if(pagerData.totalPages > 1){%>
+<%
+
+var pageUrl = pagerData.url;
+if(!pageUrl){
+  var htmlMaps = {
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quote;',
+    "'": '&#39;'
+  }
+  var escape_html = function (str) {
+    return (str + "").replace(/[<>'"]/g, function(a){
+      return htmlMaps[a];
+    })
+  }
+  var prefix = "?";
+  var querys = [];
+  for(var name in http.query){
+    if(name == 'page') continue;
+    querys.push(escape_html(name) + '=' + escape_html(http.query[name]));
+  }
+  prefix += querys.join("&");
+  if(querys.length){
+    prefix += "&";
+  }
+  pageUrl = prefix + "page=${page}";
+}
+%>
+<ul class="pagination">
+  <%if(!pagerData.hideDesc){%>
+  <li class="disabled"><span>共有<%=pagerData.count%>条记录，共<%=pagerData.totalPages%>页</span></li>
+  <%}%>
+  <% if(pagerData.currentPage > 1){ %>
+    <li class="prev"><a href="<%=pageUrl.replace('${page}', pagerData.currentPage - 1)%>">上一页</a></li>
+  <% } %>
+  <% 
+    var num = pagerData.pageNum || 3;
+      var pageIndex = [];
+      var page = pagerData.currentPage | 0 || 1;
+      for (var i = page - num; i <= page + num; i++) {
+          if (i >= 1 && i <= pagerData.totalPages) {
+              pageIndex.push(i);
+          };
+      }
+    %>
+    <% if(pageIndex[0] > 1){ %>
+    <li><a href="<%=pageUrl.replace('${page}', 1)%>">1</a></li>
+    <%}%>
+    <% if(pageIndex[0] > 2){ %>
+    <li class="disabled"><span>...</span></li>
+    <% } %>
+    <%
+      for (var i = 0, length = pageIndex.length; i < length; i++) {
+          var p = pageIndex[i];
+          if (p == page) { %>
+              <li class="active"><a href="<%=pageUrl.replace('${page}', p)%>"><%=p%></a></li>
+          <% } else { %>
+              <li><a href="<%=pageUrl.replace('${page}', p)%>"><%=p%></a></li>
+          <% }
+      }
+    %>
+    <%
+      if (pageIndex.length > 1) {
+        var last = pageIndex[pageIndex.length - 1];
+        if (last < (pagerData.totalPages - 1)) { %>
+            <li class="disabled"><span>...</span></li>
+        <% };
+        if (last < pagerData.totalPages) { %>
+            <li><a href="<%=pageUrl.replace('${page}', pagerData.totalPages)%>"><%=pagerData.totalPages%></a></li>
+        <% };
+    };
+    %>
+    <% if (page < pagerData.totalPages) { %>
+        <li class="next"><a href="<%=pageUrl.replace('${page}', pagerData.currentPage + 1)%>">下一页</a></li>
+    <% };%>
+</ul>
+<%}%>

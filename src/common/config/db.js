@@ -4,7 +4,7 @@
  * @type {Object}
  */
 export default {
-  type: 'mysql',
+  type: 'sqlite',
   host: '127.0.0.1',
   port: '',
   name: 'cicada',
@@ -22,6 +22,8 @@ export default {
   },
   adapter: {
     mysql: {},
-    mongo: {}
+    sqlite: {
+      path: think.ROOT_PATH + '/sqlite'
+    }
   }
 };

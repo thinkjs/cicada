@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>welefen 的收藏</title>
+<title><%-config.website_title%></title>
 <link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet">
 <style>
 body{background-color: #eee}
 .container{width: 900px;background-color: #fff;padding: 0 80px;padding-bottom: 80px;}
-h1{font-size: 40px !important;text-align: center;padding-bottom: 50px;padding-top: 40px;}
+h1{font-size: 40px !important;text-align: center;padding-bottom: 40px;padding-top: 40px;}
 h2,.h2{font-size: 28px;border-bottom: 1px dashed #ddd;line-height: 36px;padding-bottom: 5px;}
 .cicada-list a{color: #666}
 .cicada-list a:hover{text-decoration: none;color: #337ab7}
@@ -19,11 +19,18 @@ p.summary{margin-top: 10px;}
 p.snapshot{font-size: 14px;}
 p a{border-bottom: 1px dashed #888;padding-bottom: 1px;}
 div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
+.search-form{padding-bottom: 20px;}
 </style>
 </head>
 <body role="document">
   <div class="container theme-showcase" role="main">
-    <h1>welefen 的收藏</h1>
+    <h1><%-config.website_title%></h1>
+    <form class="form-inline search-form" style="text-align:center" action="/" method="get">
+      <div class="form-group">
+        <input type="text" name="keyword" value="<%=http.get('keyword')%>" class="form-control" placeholder="请输入搜索关键字" style="width:300px;">
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
     <div class="rows cicada-list">
       <%articleList.data.forEach(function(item){%>
       <div class="article-item">
@@ -43,6 +50,9 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
         </p>
       </div>
       <%})%>
+      <div class="pull-right">
+        <%include inc/pager.html%>
+      </div>
     </div>
   </div>
 </body>
