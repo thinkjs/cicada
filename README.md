@@ -10,7 +10,7 @@
 
 ## install
 
-首先要安装 Node.js 的环境。
+首先要安装 Node.js 的环境，然后通过下面的命令来安装 cicada：
 
 ```sh
 git clone git@github.com:thinkjs-team/cicada.git
