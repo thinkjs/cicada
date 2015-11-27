@@ -5,11 +5,7 @@
  */
 export default {
   type: 'sqlite',
-  host: '127.0.0.1',
-  port: '',
   name: 'cicada',
-  user: 'root',
-  pwd: 'root',
   prefix: 'ci_',
   encoding: 'utf8',
   nums_per_page: 10,
@@ -19,7 +15,12 @@ export default {
     timeout: 3600
   },
   adapter: {
-    mysql: {},
+    mysql: {
+      host: '127.0.0.1',
+      port: '',
+      user: 'root',
+      pwd: 'root'
+    },
     sqlite: {
       path: think.ROOT_PATH + '/sqlite'
     }

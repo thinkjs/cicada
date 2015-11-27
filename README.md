@@ -2,11 +2,16 @@
 
 基于 ThinkJS 的个人收藏系统。
 
+![](http://p1.qhimg.com/d/inn/3984d861/11.jpg)
+
 ## install
+
+首先要安装 Node.js 的环境。
 
 ```sh
 git clone git@github.com:thinkjs-team/cicada.git
-npm install
+cd cicada;
+npm install;
 ```
 
 ## 修改配置
@@ -15,20 +20,59 @@ npm install
 
 ```js
 export default {
-  token: 'TOKEN_VALUE', //token 值，收藏第一次填的值与之对应
-  website_title: 'welefen 的收藏', //网站 title
+  port: 5678, //服务启动的端口
+  protocol: 'http', //当前域名的协议
+  token: 'TOKEN_VALUE', //token 值，第一次收藏的时候要填这个值进行校验
+  website_title: 'welefen 的收藏' //收藏的 title
 };
 ```
 
 ## 编译
 
 ```sh
-npm run compile
+npm run compile;
 ```
 
 执行上面的命令进行代码编译。
 
+## 使用 mysql 数据库
+
+为了方便部署，默认使用的数据库为 `SQLite`。如果想使用 `mysql` 数据库的话，需要修改配置文件 `src/common/config/db.js` 中的值：
+
+```js
+export default {
+  type: 'sqlite',
+  name: 'cicada',
+  prefix: 'ci_',
+  encoding: 'utf8',
+  nums_per_page: 10,
+  cache: {
+    on: true,
+    type: '',
+    timeout: 3600
+  },
+  adapter: {
+    mysql: {
+      host: '127.0.0.1',
+      port: '',
+      user: 'root',
+      pwd: 'root'
+    },
+    sqlite: {
+      path: think.ROOT_PATH + '/sqlite'
+    }
+  }
+};
+```
+
+将 type 值修改为 `mysql`，并修改 adapter.mysql 里的对应配置。
+
+建立 `cicada` 数据库，将 `mysql/cicada.sql` 文件导入到数据库中。
+
+
 ## 启动服务
+
+以全局的方式安装 `pm2` 模块，安装完成后检查 pm2 命令是否存在。
 
 修改 `pm2.json` 中的配置 `cwd` 值，修改为当前项目所在的路径。
 
@@ -36,7 +80,7 @@ npm run compile
 
 ## 配置 nginx.conf
 
-修改文件 `nginx.conf` 中对应的配置，使用 nginx 做一层反向代理。
+修改文件 `nginx.conf` 中对应的配置，将配置文件软链到 nginx 的配置文件目录中，然后 reload 下 nginx 配置。
 
 ## 添加书签
 
@@ -46,37 +90,4 @@ javascript:u%3Dlocation.href%3Bt%3Ddocument.title%3Bc %3D "" %2B (window.getSele
 
 将上面代码中的 `localhost:8360` 改为你的域名，然后选择代码并拖拽到浏览器书签中。
 
-
-## 使用 mysql 数据库
-
-默认使用的数据库为 `SQLite`，如果想使用 `mysql` 数据库的话，需要修改配置文件 `src/common/config/db.js` 中的值：
-
-```js
-export default {
-  type: 'mysql', //使用 mysql 数据库
-  host: '127.0.0.1',
-  port: '',
-  name: 'cicada', //数据库名
-  user: 'root', //数据库帐号
-  pwd: 'root', //数据库密码
-  prefix: 'ci_',
-  encoding: 'utf8',
-  nums_per_page: 10,
-  log_sql: true,
-  log_connect: true,
-  cache: {
-    on: true,
-    type: '',
-    timeout: 3600
-  },
-  adapter: {
-    mysql: {},
-    sqlite: {
-      path: think.ROOT_PATH + '/sqlite'
-    }
-  }
-};
-```
-
-将 `mysql/cicada.sql` 文件导入到数据库中。
 
