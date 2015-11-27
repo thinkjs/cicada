@@ -55,6 +55,8 @@ export default class extends think.service.base {
       //remove charset meta
       content = content.replace(CHARSET_REGEXP, '');
       return content;
+    }).catch(() => {
+      return 'error!';
     });
   }
   /**
@@ -135,7 +137,6 @@ export default class extends think.service.base {
     let content = await this.getContent();
     content = this.setBaseMeta(content);
     let cleanContent = this.getCleanContent(content);
-    console.log(cleanContent)
     return {
       content,
       cleanContent
