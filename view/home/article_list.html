@@ -3,12 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<meta name="referrer" content="always">
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 <title><%-config.website_title%></title>
 <link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet">
 <style>
 body{background-color: #eee}
-.container{width: 900px;background-color: #fff;padding: 0 80px;padding-bottom: 80px;}
+.container{max-width: 900px;background-color: #fff;padding: 0 8%;padding-bottom: 80px;}
 h1{font-size: 40px !important;text-align: center;padding-bottom: 40px;padding-top: 40px;}
 h2,.h2{font-size: 28px;border-bottom: 1px dashed #ddd;line-height: 36px;padding-bottom: 5px;}
 .cicada-list a, h1 a{color: #666}
@@ -21,6 +24,10 @@ p a{border-bottom: 1px dashed #888;padding-bottom: 1px;}
 div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
 .search-form{padding-bottom: 20px;}
 .copyright{text-align: center;line-height: 80px;font-size: 14px;color: #666}
+@media (min-width: 768px){
+  input.search{width: 300px !important;}
+}
+
 </style>
 </head>
 <body role="document">
@@ -28,7 +35,7 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
     <h1><a href="/"><%-config.website_title%></a></h1>
     <form class="form-inline search-form" style="text-align:center" action="/" method="get">
       <div class="form-group">
-        <input type="text" name="keyword" value="<%=http.get('keyword')%>" class="form-control" placeholder="请输入搜索关键字" style="width:300px;">
+        <input type="text" name="keyword" value="<%=http.get('keyword')%>" class="form-control search" placeholder="请输入关键字">
       </div>
       <button type="submit" class="btn btn-primary">Search</button>
     </form>
