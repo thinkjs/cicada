@@ -65,7 +65,7 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
     </div>
   </div>
   <div class="rows copyright">
-    Powered by <a href="https://github.com/thinkjs-team/cicada">Cicada</a> & <a href="https://thinkjs.org/">ThinkJS</a>. <% if(isLogin) { %> <a href="/logout"><%-_('logout')%></a> <% } else { %> <a href="/login"><%-_('login')%></a> <% } %>
+    Powered by <a href="https://github.com/thinkjs-team/cicada">Cicada</a> & <a href="https://thinkjs.org/">ThinkJS</a>. <% if(isLogin) { %> <a href='<%-bookmarks%>'><%-_('add-to-bookmarks')%></a> | <a href="/logout"><%-_('logout')%></a> <% } else { %> <a href="/login"><%-_('login')%></a> <% } %>
   </div>
 </body>
 </html>
