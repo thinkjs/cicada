@@ -1,3 +1,5 @@
 node_modules/
-
 app/
+pm2.dev.json
+sqlite.dev
+src/common/config/env/development.js
