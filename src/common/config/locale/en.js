@@ -16,5 +16,7 @@ export default {
   'snapshot': 'Snapshot: ',
   'full-edition': 'Full Edition',
   'concise-edition': 'Concise Edition',
-  'snapshot-warning': 'It\'s a snaphot of %s in datetime %s, It has nothing to do with the author of this page. change to'
+  'snapshot-warning': 'It\'s a snaphot of %s in datetime %s, It has nothing to do with the author of this page. change to',
+  'login': 'Login',
+  'logout': 'Logout'
 };

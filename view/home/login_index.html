@@ -1,0 +1,8 @@
+<form action="/login" method="post">
+  <label for="token">TOKEN:</label>
+  <input type="password" name="token" placeholder="token">
+  <input type="submit" value="login" />
+  <% if( loginFailed ) { %>
+    <p>login Failed!</p>
+  <% } %>
+</form>

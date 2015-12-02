@@ -55,6 +55,7 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
         <p class="snapshot">
           <a href="<%=item.url%>" target="_blank"><%- _('origin-article')%></a> | 
           <%- _('snapshot')%> <a target="_blank" href="/article/snapshot?id=<%-item.id%>"><%-_('full-edition')%></a>, <a href="/article/snapshot?id=<%-item.id%>&type=clean" target="_blank"><%- _('concise-edition')%></a>
+          <% if( isLogin ) { %> | <a href="/article/delete?id=<%-item.id%>"><%-_('delete')%></a> <% } %>
         </p>
       </div>
       <%})%>
@@ -64,7 +65,7 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
     </div>
   </div>
   <div class="rows copyright">
-    Powered by <a href="https://github.com/thinkjs-team/cicada">Cicada</a> & <a href="https://thinkjs.org/">ThinkJS</a>
+    Powered by <a href="https://github.com/thinkjs-team/cicada">Cicada</a> & <a href="https://thinkjs.org/">ThinkJS</a>. <% if(isLogin) { %> <a href="/logout"><%-_('logout')%></a> <% } else { %> <a href="/login"><%-_('login')%></a> <% } %>
   </div>
 </body>
 </html>

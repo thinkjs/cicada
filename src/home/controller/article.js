@@ -21,6 +21,7 @@ export default class extends Base {
     let data = await this.model('article').order('id DESC').setRelation('tag').where(where).page(this.get('page'), 10).countSelect(true);
     this.assign('articleList', data);
     this.assign('pagerData', data);
+    this.assign('isLogin', this.cookie('token') === this.config('token'));
     return this.display();
   }
   /**
