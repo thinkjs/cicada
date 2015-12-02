@@ -22,7 +22,7 @@ header.snapshot a{color: blue;text-decoration: none;}
 </head>
 <body>
   <header class="snapshot">
-    下面是原始网页 <a href="<%-info.url%>"><%-info.url%></a> 在 <%-getFormatDate(info.create_time)%> 的快照。<%-http.host%> 与该网页作者无关，不对其内容负责。切换到
+    <%- _('snapshot-warning', '<a href="' + info.url + '">' + info.url + '</a>', getFormatDate(info.create_time))%>
     <%if(http.get('type') == 'clean'){%>
       <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>"><%-_('full-edition')%></a>
     <%}else{%>
