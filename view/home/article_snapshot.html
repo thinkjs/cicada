@@ -24,9 +24,9 @@ header.snapshot a{color: blue;text-decoration: none;}
   <header class="snapshot">
     下面是原始网页 <a href="<%-info.url%>"><%-info.url%></a> 在 <%-getFormatDate(info.create_time)%> 的快照。<%-http.host%> 与该网页作者无关，不对其内容负责。切换到
     <%if(http.get('type') == 'clean'){%>
-      <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>">完整版</a>
+      <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>"><%-_('full-edition')%></a>
     <%}else{%>
-      <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>&type=clean">简洁版</a>
+      <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>&type=clean"><%-_('concise-edition')%></a>
     <%}%>
   </header>
   <div class="snapshot-content">

@@ -35,7 +35,7 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
     <h1><a href="/"><%-config.website_title%></a></h1>
     <form class="form-inline search-form" style="text-align:center" action="/" method="get">
       <div class="form-group">
-        <input type="text" name="keyword" value="<%=http.get('keyword')%>" class="form-control search" placeholder="请输入关键字">
+        <input type="text" name="keyword" value="<%=http.get('keyword')%>" class="form-control search" placeholder="<%- _('search-placeholder')%>">
       </div>
       <button type="submit" class="btn btn-primary">Search</button>
     </form>
@@ -43,18 +43,18 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
       <%articleList.data.forEach(function(item){%>
       <div class="article-item">
         <h2><a href="<%=item.url%>" target="_blank"><%=item.title%></a></h2>
-        <p class="datetime">收藏于：<time><%-getFormatDate(item.create_time)%></time></p>
+        <p class="datetime"><%- _('favorite-name')%><time><%-getFormatDate(item.create_time)%></time></p>
         <p class="summary"><%-item.summary.replace(/\n/g, '<br />')%></p>
         <%if(!think.isEmpty(item.tag)){%>
           <p class="tags">
-            标签：<%item.tag.forEach(function(tag){%>
+            <%-_('tags-name')%><%item.tag.forEach(function(tag){%>
             <%=tag.name%>
             <%})%>
           </p>
           <%}%>
         <p class="snapshot">
-          <a href="<%=item.url%>" target="_blank">查看原文</a> | 
-          查看快照：<a target="_blank" href="/article/snapshot?id=<%-item.id%>">完整版</a>, <a href="/article/snapshot?id=<%-item.id%>&type=clean" target="_blank">简洁版</a>
+          <a href="<%=item.url%>" target="_blank"><%- _('origin-article')%></a> | 
+          <%- _('snapshot')%> <a target="_blank" href="/article/snapshot?id=<%-item.id%>"><%-_('full-edition')%></a>, <a href="/article/snapshot?id=<%-item.id%>&type=clean" target="_blank"><%- _('concise-edition')%></a>
         </p>
       </div>
       <%})%>

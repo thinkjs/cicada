@@ -6,5 +6,5 @@ export default {
   port: 5678,
   protocol: 'http',
   token: 'TOKEN_VALUE',
-  website_title: 'welefen 的收藏'
+  website_title: 'welefen\'s favorites'
 };
