@@ -1,8 +1,11 @@
-<form action="/login" method="post">
-  <label for="token">TOKEN:</label>
-  <input type="password" name="token" placeholder="token">
-  <input type="submit" value="login" />
+<%include inc/header.html%>
+<form action="/login" method="post" class="form-inline" style="text-align: center;">
+  <div class="form-group">
+    <input type="password" name="token" placeholder="<%-_('please-input-token')%>" class="form-control">
+    <input type="submit" value="<%-_('login')%>" class="btn btn-primary"/>
+  </div>
   <% if( loginFailed ) { %>
-    <p>login Failed!</p>
+    <p><%-_('login-fail')%></p>
   <% } %>
 </form>
+<%include inc/footer.html%>

@@ -20,5 +20,7 @@ export default {
   'login': 'Login',
   'logout': 'Logout',
   'delete': 'Delete',
-  'add-to-bookmarks': 'Add to bookmarks'
+  'add-to-bookmarks': 'Add to bookmarks',
+  'please-input-token': 'Please input token',
+  'login-fail': 'Login Fail!'
 };
