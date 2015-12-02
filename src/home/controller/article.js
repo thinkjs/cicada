@@ -67,6 +67,16 @@ export default class extends Base {
     this.success();
   }
   /**
+   * delete action
+   */
+  async deleteAction() {
+    let id = this.get('id');
+    let model = this.model('article');
+    let result = await model.where({id}).delete();
+    if( !result ) return this.fail('delete fail');
+    this.redirect( this.referrer() || '/' );
+  }
+  /**
    * snapshot
    * @return {} []
    */

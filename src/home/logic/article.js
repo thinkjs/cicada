@@ -36,6 +36,20 @@ export default class extends think.logic.base {
     }
   }
   /**
+   * delete action logic
+   */
+  deleteAction() {
+    let token = this.cookie('token');
+    let configToken = this.config('token');
+    if( token !== configToken ) {
+      return this.fail('need login!');
+    }
+
+    this.rules = {
+      'id': 'required|int'
+    }
+  }
+  /**
    * snapshot
    * @return {} []
    */

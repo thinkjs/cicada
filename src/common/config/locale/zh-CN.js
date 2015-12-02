@@ -18,5 +18,6 @@ export default {
   'concise-edition': '简洁版',
   'snapshot-warning': '下面是原始网页  在 %s 的快照。%s 与该网页作者无关，不对其内容负责。切换到',
   'login': '登录',
-  'logout': '注销'
+  'logout': '注销',
+  'delete': '删除'
 };
