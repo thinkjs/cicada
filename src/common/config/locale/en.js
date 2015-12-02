@@ -10,6 +10,7 @@ export default {
   'submit': 'submit',
   'success': 'success',
   'tags-name': 'Tags: ',
+  'search': 'Search',
   'search-placeholder': 'Search keyword',
   'origin-article': 'Origin Article',
   'favorite-name': 'Time: ',

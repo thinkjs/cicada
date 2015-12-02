@@ -3,7 +3,7 @@
       <div class="form-group">
         <input type="text" name="keyword" value="<%=http.get('keyword')%>" class="form-control search" placeholder="<%- _('search-placeholder')%>">
       </div>
-      <button type="submit" class="btn btn-primary">Search</button>
+      <button type="submit" class="btn btn-primary"><%-_('search')%></button>
     </form>
     <div class="rows cicada-list">
       <%articleList.data.forEach(function(item){%>

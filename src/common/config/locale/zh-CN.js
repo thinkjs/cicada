@@ -10,6 +10,7 @@ export default {
   'submit': '提交',
   'success': '收藏成功',
   'tags-name': '标签：',
+  'search': '搜索',
   'search-placeholder': '请输入关键字搜索',
   'origin-article': '原始文章',
   'favorite-name': '收藏于 ',
