@@ -24,5 +24,6 @@ export default {
   'add-to-bookmarks': '添加到收藏夹',
   'please-input-token': '请输入 TOKEN',
   'login-fail': '登录失败请重新登录',
-  'bookmark-adding': '收藏添加中...'
+  'bookmark-adding': '收藏添加中...',
+  'confirm-delete': '确定删除该收藏？'
 };
