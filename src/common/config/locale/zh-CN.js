@@ -26,5 +26,11 @@ export default {
   'login-fail': '登录失败请重新登录',
   'bookmark-adding': '收藏添加中...',
   'confirm-delete': '确定删除该收藏？',
-  'drag-to-bookmark-bar': '拖拽此链接到收藏栏'
+  'drag-to-bookmark-bar': '拖拽此链接到收藏栏',
+  'TOKEN_INVALID': [1000, '密码错误'],
+  'NEED_LOGIN': [1001, '需要登陆'],
+  'SAVE_FAIL': [1002, '保存失败'],
+  'DELETE_FAIL': [1004, '删除失败'],
+  'ARTICLE_EXISTS': [1003, '收藏已存在'],
+  'ID_NOT_EXIST': [1005, '收藏不存在']
 };

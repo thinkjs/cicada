@@ -47,7 +47,7 @@ export default class extends Base {
     }else{
       tags = [];
     }
-    
+
     let model = this.model('article');
     let result = await model.thenAdd({
       url: data.url,
@@ -60,10 +60,10 @@ export default class extends Base {
       }
     }, {url: data.url}).catch(() => false);
     if(result === false){
-      return this.fail('save fail');
+      return this.fail('SAVE_FAIL');
     }
     if(result.type === 'exist'){
-      return this.fail('article exist');
+      return this.fail('ARTICLE_EXISTS');
     }
     this.success();
   }
@@ -74,7 +74,7 @@ export default class extends Base {
     let id = this.get('id');
     let model = this.model('article');
     let result = await model.where({id}).delete();
-    if( !result ) return this.fail('delete fail');
+    if( !result ) return this.fail('DELETE_FAIL');
     this.redirect( this.referrer() || '/' );
   }
   /**
@@ -89,7 +89,7 @@ export default class extends Base {
     let infoPromise = this.model('article').setRelation(false).where({id: id}).find();
     let [snap, info] = await Promise.all([snapPromise, infoPromise]);
     if(think.isEmpty(snap)){
-      return this.fail('id not exist');
+      return this.fail('ID_NOT_EXIST');
     }
     let content = snap[field];
     this.assign('content', content);

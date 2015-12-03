@@ -23,7 +23,7 @@ export default class extends think.logic.base {
     if(token !== configToken){
       token = this.post('token');
       if(token !== configToken){
-        return this.fail('token not valid');
+        return this.fail('TOKEN_INVALID');
       }
       //set token cookie
       this.cookie('token', token, {
@@ -42,7 +42,7 @@ export default class extends think.logic.base {
     let token = this.cookie('token');
     let configToken = this.config('token');
     if( token !== configToken ) {
-      return this.fail('need login!');
+      return this.fail('NEED_LOGIN');
     }
 
     this.rules = {

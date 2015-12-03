@@ -26,5 +26,12 @@ export default {
   'login-fail': 'Login Fail!',
   'bookmark-adding': 'Bookmark adding...',
   'confirm-delete': 'Delete it really ?',
-  'drag-to-bookmark-bar': 'Drag url to bookmark bar'
+  'drag-to-bookmark-bar': 'Drag url to bookmark bar',
+  'token-not-valid': 'Token not valid!',
+  'TOKEN_INVALID': [1000, 'token invalid!'],
+  'NEED_LOGIN': [1001, 'need login!'],
+  'SAVE_FAIL': [1002, 'save fail!'],
+  'DELETE_FAIL': [1004, 'delete fail'],
+  'ARTICLE_EXISTS': [1003, 'article exists!'],
+  'ID_NOT_EXIST': [1005, 'id not exist']
 };
