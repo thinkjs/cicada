@@ -61,20 +61,27 @@ span.msg{margin-left: 20px;}
 <script src="/static/module/jquery/jquery.form.js"></script>
 <script>
 $(function(){
-  $('#addForm').ajaxForm(function(data){
-    var msg = $('span.msg');
-    if(data.errno){
-      msg.html('<span class="label label-danger">' + data.errmsg + '</span>');
-      setTimeout(function(){
-        msg.html('');
-      }, 800)
-    }else{
-      msg.html('<span class="label label-success"><%-_("success")%></span>');
-      setTimeout(function(){
-        window.close();
-      }, 800)
+  var msg = $('span.msg'), submitBtn = $('button[type="submit"]');
+  $('#addForm').ajaxForm({
+    beforeSubmit: function() {
+      msg.html('<span class="label label-info"><%-_("bookmark-adding")%></span>');
+      submitBtn.attr('disabled', 'disabled');
+    },
+    success: function(data) {
+      submitBtn.removeAttr('disabled');
+      if(data.errno){
+        msg.html('<span class="label label-danger">' + data.errmsg + '</span>');
+        setTimeout(function(){
+          msg.html('');
+        }, 800)
+      }else{
+        msg.html('<span class="label label-success"><%-_("success")%></span>');
+        setTimeout(function(){
+          window.close();
+        }, 800)
+      }
     }
-  })
+  });
 })
 </script>
 </body>

@@ -23,5 +23,6 @@ export default {
   'delete': '删除',
   'add-to-bookmarks': '添加到收藏夹',
   'please-input-token': '请输入 TOKEN',
-  'login-fail': '登录失败请重新登录'
+  'login-fail': '登录失败请重新登录',
+  'bookmark-adding': '收藏添加中...'
 };

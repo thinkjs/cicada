@@ -23,5 +23,6 @@ export default {
   'delete': 'Delete',
   'add-to-bookmarks': 'Add to bookmarks',
   'please-input-token': 'Please input token',
-  'login-fail': 'Login Fail!'
+  'login-fail': 'Login Fail!',
+  'bookmark-adding': 'Bookmark adding...'
 };
