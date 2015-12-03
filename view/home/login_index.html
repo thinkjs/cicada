@@ -2,8 +2,8 @@
 <form action="/login" method="post" class="form-inline" style="text-align: center;">
   <div class="form-group">
     <input type="password" name="token" placeholder="<%-_('please-input-token')%>" class="form-control">
-    <input type="submit" value="<%-_('login')%>" class="btn btn-primary"/>
   </div>
+  <input type="submit" value="<%-_('login')%>" class="btn btn-primary"/>
   <% if( loginFailed ) { %>
     <p><%-_('login-fail')%></p>
   <% } %>
