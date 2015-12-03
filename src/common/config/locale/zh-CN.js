@@ -25,5 +25,6 @@ export default {
   'please-input-token': '请输入 TOKEN',
   'login-fail': '登录失败请重新登录',
   'bookmark-adding': '收藏添加中...',
-  'confirm-delete': '确定删除该收藏？'
+  'confirm-delete': '确定删除该收藏？',
+  'drag-to-bookmark-bar': '拖拽此链接到收藏栏'
 };

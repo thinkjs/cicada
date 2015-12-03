@@ -25,5 +25,6 @@ export default {
   'please-input-token': 'Please input token',
   'login-fail': 'Login Fail!',
   'bookmark-adding': 'Bookmark adding...',
-  'confirm-delete': 'Delete it really ?'
+  'confirm-delete': 'Delete it really ?',
+  'drag-to-bookmark-bar': 'Drag url to bookmark bar'
 };
