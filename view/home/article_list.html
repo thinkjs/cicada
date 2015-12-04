@@ -21,7 +21,7 @@
         <p class="snapshot">
           <a href="<%=item.url%>" target="_blank"><%- _('origin-article')%></a> |
           <%- _('snapshot')%> <a target="_blank" href="/article/snapshot?id=<%-item.id%>"><%-_('full-edition')%></a>, <a href="/article/snapshot?id=<%-item.id%>&type=clean" target="_blank"><%- _('concise-edition')%></a>
-          <% if( isLogin ) { %> | <a onClick="return confirm('<%-_('confirm-delete')%>');" href="/article/delete?id=<%-item.id%>"><%-_('delete')%></a> <% } %>
+          <% if( isLogin ) { %> | <a href="/article/edit?id=<%-item.id%>" target="_blank"><%-_('edit')%></a> | <a onClick="return confirm('<%-_('confirm-delete')%>');" href="/article/delete?id=<%-item.id%>"><%-_('delete')%></a><% } %>
         </p>
       </div>
       <%})%>

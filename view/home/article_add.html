@@ -38,7 +38,7 @@ span.msg{margin-left: 20px;}
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label"><%- _('article-tags')%></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="tag" name="tag" placeholder="<%- _('tags-seperate')%>">
+      <input type="text" value="<%=http.get('tag')%>" class="form-control" id="tag" name="tag" placeholder="<%- _('tags-seperate')%>">
     </div>
   </div>
   <%if(showToken){%>
@@ -78,6 +78,7 @@ $(function(){
         msg.html('<span class="label label-success"><%-_("success")%></span>');
         setTimeout(function(){
           window.close();
+          window.opener.location.reload();
         }, 800)
       }
     }

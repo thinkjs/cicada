@@ -3,8 +3,9 @@
  * config
  */
 export default {
-  port: 5678,
+  port: 9966,
   protocol: 'http',
-  token: 'TOKEN_VALUE',
-  website_title: 'welefen\'s favorites'
+  token: 'yw3799877',
+  website_title: 'akira\'s favorites',
+  visibility: 'public'
 };
