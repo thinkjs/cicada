@@ -1,92 +1,45 @@
-<%if(pagerData.totalPages > 1){%>
-<%
+{% set current = pagerData.currentPage %}
+{% set total = pagerData.totalPages %}
 
-var pageUrl = pagerData.url;
-if(!pageUrl){
-  var htmlMaps = {
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quote;',
-    "'": '&#39;'
-  }
-  var escape_html = function (str) {
-    return (str + "").replace(/[<>'"]/g, function(a){
-      return htmlMaps[a];
-    })
-  }
-  var prefix = "?";
-  var querys = [];
-  for(var name in http.query){
-    if(name == 'page') continue;
-    querys.push(escape_html(name) + '=' + escape_html(http.query[name]));
-  }
-  prefix += querys.join("&");
-  if(querys.length){
-    prefix += "&";
-  }
-  pageUrl = prefix + "page=${page}";
-}
-%>
+{% if total > 1 %}
 <ul class="pagination">
-  <%if(!pagerData.hideDesc){%>
-  <li class="disabled"><span>共有<%=pagerData.count%>条记录，共<%=pagerData.totalPages%>页</span></li>
-  <%}%>
-  <% if(pagerData.currentPage > 1){ %>
-    <li class="prev"><a href="<%=pageUrl.replace('${page}', pagerData.currentPage - 1)%>">上一页</a></li>
-  <% } %>
-  <% 
-    var num = pagerData.pageNum || 2;
-    var page = pagerData.currentPage | 0 || 1;
-    var totalPages = pagerData.totalPages;
-    var pageIndex = [];
-    var start = page - num;
-    var stop = page + num;
-
-    if(start <= 1) {
-      start = 1;
-      stop = start + num * 2 + 1;
-    }
-
-    if(stop >= totalPages) {
-      stop = totalPages;
-      start = totalPages - num * 2 - 1;
-    }
-
-    for (var i = start; i <= stop; i++) {
-      if (i >= 1 && i <= totalPages) {
-        pageIndex.push(i);
-      }
-    }
-    %>
-    <% if(pageIndex[0] > 1){ %>
-    <li><a href="<%=pageUrl.replace('${page}', 1)%>">1</a></li>
-    <%}%>
-    <% if(pageIndex[0] > 2){ %>
-    <li class="disabled"><span>...</span></li>
-    <% } %>
-    <%
-      for (var i = 0, length = pageIndex.length; i < length; i++) {
-          var p = pageIndex[i];
-          if (p == page) { %>
-              <li class="active"><a href="<%=pageUrl.replace('${page}', p)%>"><%=p%></a></li>
-          <% } else { %>
-              <li><a href="<%=pageUrl.replace('${page}', p)%>"><%=p%></a></li>
-          <% }
-      }
-    %>
-    <%
-      if (pageIndex.length > 1) {
-        var last = pageIndex[pageIndex.length - 1];
-        if (last < (pagerData.totalPages - 1)) { %>
-            <li class="disabled"><span>...</span></li>
-        <% };
-        if (last < pagerData.totalPages) { %>
-            <li><a href="<%=pageUrl.replace('${page}', pagerData.totalPages)%>"><%=pagerData.totalPages%></a></li>
-        <% };
-    };
-    %>
-    <% if (page < pagerData.totalPages) { %>
-        <li class="next"><a href="<%=pageUrl.replace('${page}', pagerData.currentPage + 1)%>">下一页</a></li>
-    <% };%>
+  {% if not pagerData.hideDesc %}
+    <li class="disabled">
+      <span>共有 {{pagerData.count}} 条记录，共 {{total}} 页</span>
+    </li>
+  {% endif %}
+  {% if current > 1 %}
+    <li class="prev">
+      <a href="{{ (current - 1) | pageUrl(http.query) }}">上一页</a>
+    </li>
+    {% if current < 6 %}
+      {% for page in range(1, current-1) %}
+        <li><a href="{{ page | pageUrl(http.query) }}">{{page}}</a></li>
+      {% endfor %}
+    {% else %}
+      <li><a href="{{ 1 | pageUrl}}">1</a></li>
+      <li class="disabled"><span>...</span></li>
+      {% for page in range(current-3, current-1) %}
+        <li><a href="{{ page | pageUrl(http.query) }}">{{page}}</a></li>
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+  <li class="current"><a href="{{ current | pageUrl(http.query) }}">{{current}}</a></li>
+  {% if current < total %}
+    {% if current > (total - 5) %}
+      {% for page in range(current+1, total) %}
+        <li><a href="{{ page | pageUrl(http.query) }}">{{page}}</a></li>
+      {% endfor %}
+    {% else %}
+      {% for page in range(current+1, current+3) %}
+        <li><a href="{{ page | pageUrl(http.query) }}">{{page}}</a></li>
+      {% endfor %}
+      <li class="disabled"><span>...</span></li>
+      <li><a href="{{ total | pageUrl(http.query) }}">{{total}}</a></li>
+    {% endif %}
+    <li class="next">
+      <a href="{{ ( current + 1 ) | pageUrl(http.query) }}">下一页</a>
+    </li>
+  {% endif %}
 </ul>
-<%}%>
+{% endif %}

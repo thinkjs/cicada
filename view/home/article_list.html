@@ -1,4 +1,4 @@
-{% extends "inc/base.html" %}
+{% extends "./inc/base.html" %}
 
 {% block body %}
 <form class="form-inline search-form" style="text-align:center" action="/" method="get">
@@ -18,15 +18,19 @@
 
     <p class="datetime">
       {{ _('favorite-name') }}
-      <time> {{ getFormatDate(item.create_time) }}</time>
+      <time> {{ item.create_time | formatDate }}</time>
     </p>
     <p class="summary">
-      {{ item.summary.replace( /\n/g, '<br />') }}
+      <!--| replace( /\n/g, '<br />')-->
+      {{ item.summary }}
     </p>
-    {% if !this.isEmpty(item.tag) %}
+    {% if not think.isEmpty(item.tag) %}
     <p class="tags">
       {{ _('tags-name') }}
-      {{ item.tag | join(',') }}
+      {% set comma = joiner() %}
+      {% for tag in item.tag -%}
+        {{ comma() }} {{ tag.name }}
+      {%- endfor %}
     </p>
     {% endif %}
     <p class="snapshot">
@@ -39,12 +43,16 @@
   </div>
   {% endfor %}
   <div class="pull-right">
-    {% include "inc/pager.html" %}
+    {% include "./inc/pager.html" %}
   </div>
 </div>
 {% endblock %}
 
 {% block footer %}
-{% if isLogin %} | <a href="/logout"><%-_('logout')%></a> <% } else { %> <a href="/login"><%-_('login')%></a> <% } %>
-<a href="{{bookmarks}}" title="{{ _('drag-to-bookmark-bar')}} "> {{ _('add-to-bookmarks')}} </a>
-{% endif %}
+  {% if isLogin %}
+    <a title="{{ _('drag-to-bookmark-bar') }}" href='{{bookmarks}}'>{{ _('add-to-bookmarks') }}</a>  |
+    <a href="/logout">{{ _('logout') }}</a>
+  {% else %}
+    <a href="/login">{{ _('login') }}</a>
+  {% endif %}
+{% endblock %}
