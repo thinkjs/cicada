@@ -22,15 +22,15 @@ header.snapshot a{color: blue;text-decoration: none;}
 </head>
 <body>
   <header class="snapshot">
-    <%- _('snapshot-warning', '<a href="' + info.url + '">' + info.url + '</a>', getFormatDate(info.create_time))%>
-    <%if(http.get('type') == 'clean'){%>
-      <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>"><%-_('full-edition')%></a>
-    <%}else{%>
-      <a href="<%-prefix%>/article/snapshot?id=<%-info.id%>&type=clean"><%-_('concise-edition')%></a>
-    <%}%>
+    {{ _('snapshot-warning', '<a href="' + info.url + '">' + info.url + '</a>', info.create_time | formatDate) }}
+    {% if http.get('type') == 'clean' %}
+      <a href="{{prefix}}/article/snapshot?id={{info.id}}">{{_('full-edition')}}</a>
+    {% else %}
+      <a href="{{prefix}}/article/snapshot?id={{info.id}}&type=clean">{{_('concise-edition')}}</a>
+    {% endif %}
   </header>
   <div class="snapshot-content">
-    <%-content%>
+    {{content}}
   </div>
 </body>
 </html>
