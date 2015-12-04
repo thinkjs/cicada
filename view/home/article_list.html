@@ -1,37 +1,50 @@
-<%include inc/header.html%>
-    <form class="form-inline search-form" style="text-align:center" action="/" method="get">
-      <div class="form-group">
-        <input type="text" name="keyword" value="<%=http.get('keyword')%>" class="form-control search" placeholder="<%- _('search-placeholder')%>">
-      </div>
-      <button type="submit" class="btn btn-primary"><%-_('search')%></button>
-    </form>
-    <div class="rows cicada-list">
-      <%articleList.data.forEach(function(item){%>
-      <div class="article-item">
-        <h2><a href="<%=item.url%>" target="_blank"><%=item.title%></a></h2>
-        <p class="datetime"><%- _('favorite-name')%><time><%-getFormatDate(item.create_time)%></time></p>
-        <p class="summary"><%-item.summary.replace(/\n/g, '<br />')%></p>
-        <%if(!think.isEmpty(item.tag)){%>
-          <p class="tags">
-            <%-_('tags-name')%><%item.tag.forEach(function(tag){%>
-            <%=tag.name%>
-            <%})%>
-          </p>
-          <%}%>
-        <p class="snapshot">
-          <a href="<%=item.url%>" target="_blank"><%- _('origin-article')%></a> |
-          <%- _('snapshot')%> <a target="_blank" href="/article/snapshot?id=<%-item.id%>"><%-_('full-edition')%></a>, <a href="/article/snapshot?id=<%-item.id%>&type=clean" target="_blank"><%- _('concise-edition')%></a>
-          <% if( isLogin ) { %> | <a onClick="return confirm('<%-_('confirm-delete')%>');" href="/article/delete?id=<%-item.id%>"><%-_('delete')%></a> <% } %>
-        </p>
-      </div>
-      <%})%>
-      <div class="pull-right">
-        <%include inc/pager.html%>
-      </div>
-    </div>
+{% extends "inc/base.html" %}
+
+{% block body %}
+<form class="form-inline search-form" style="text-align:center" action="/" method="get">
+  <div class="form-group">
+    <input type="text" name="keyword" value="{{http.get('keyword')}}" class="form-control search" placeholder="{{_('search-placeholder')}}">
   </div>
-  <div class="rows copyright">
-    Powered by <a href="https://github.com/thinkjs-team/cicada">Cicada</a> & <a href="https://thinkjs.org/">ThinkJS</a>. <% if(isLogin) { %> <a title="<%-_('drag-to-bookmark-bar')%>" href='<%-bookmarks%>'><%-_('add-to-bookmarks')%></a> | <a href="/logout"><%-_('logout')%></a> <% } else { %> <a href="/login"><%-_('login')%></a> <% } %>
+  <button type="submit" class="btn btn-primary"> {{ _('search') }} </button>
+</form>
+<div class="rows cicada-list">
+  {% for item in articleList.data %}
+  <div class="article-item">
+    <h2>
+      <a href="{{ item.url }}" target="_blank">
+        {{ item.title }}
+      </a>
+    </h2>
+
+    <p class="datetime">
+      {{ _('favorite-name') }}
+      <time> {{ getFormatDate(item.create_time) }}</time>
+    </p>
+    <p class="summary">
+      {{ item.summary.replace( /\n/g, '<br />') }}
+    </p>
+    {% if !this.isEmpty(item.tag) %}
+    <p class="tags">
+      {{ _('tags-name') }}
+      {{ item.tag | join(',') }}
+    </p>
+    {% endif %}
+    <p class="snapshot">
+      <a href="{{ item.url }}" target="_blank">
+        {{ _('origin-article') }}
+      </a>
+      {{ _('snapshot') }} <a href="/article/snapshot?id={{ item.id }}" target="_blank"> {{ _('full-edition') }}</a>,
+      <a href="/article/snapshot?id={{ item.id }}&type=clean" target="_blank"> {{ _('concise-edition') }}</a>
+    </p>
   </div>
-</body>
-</html>
+  {% endfor %}
+  <div class="pull-right">
+    {% include "inc/pager.html" %}
+  </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% if isLogin %} | <a href="/logout"><%-_('logout')%></a> <% } else { %> <a href="/login"><%-_('login')%></a> <% } %>
+<a href="{{bookmarks}}" title="{{ _('drag-to-bookmark-bar')}} "> {{ _('add-to-bookmarks')}} </a>
+{% endif %}
