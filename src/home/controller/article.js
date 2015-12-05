@@ -32,6 +32,24 @@ export default class extends Base {
     return this.display();
   }
   /**
+   * edit page
+   */
+  async editAction(){
+    let {id} = this.get();
+    let model = this.model('article');
+    let findData = await model.where({id: id}).find();
+    
+    delete findData.id;
+    delete findData.snapshot;
+    delete findData.create_time;
+
+    findData.tag = findData.tag.map(o => o.name).join();
+
+    let url = require('url').format({pathname: '/article/add', query: findData});
+
+    return this.redirect(url);
+  }
+  /**
    * add action
    */
   async saveAction(){
@@ -49,7 +67,7 @@ export default class extends Base {
     }
 
     let model = this.model('article');
-    let result = await model.thenAdd({
+    let record = {
       url: data.url,
       title: data.title,
       summary: data.summary,
@@ -58,12 +76,20 @@ export default class extends Base {
         content: contents.content,
         content_clean: contents.cleanContent
       }
-    }, {url: data.url}).catch(() => false);
+    };
+    let result = await model.thenAdd(record, 
+      {url: data.url}).catch(() => false);
+    
+    if(result.type === 'exist'){
+      let findData = await model.where({url: data.url}).find();
+      if(findData){
+        record.id = findData.id;
+        await model.update(record);
+      }
+    }
+
     if(result === false){
       return this.fail('SAVE_FAIL');
-    }
-    if(result.type === 'exist'){
-      return this.fail('ARTICLE_EXISTS');
     }
     this.success();
   }

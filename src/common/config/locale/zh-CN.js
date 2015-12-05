@@ -21,6 +21,7 @@ export default {
   'login': '登录',
   'logout': '注销',
   'delete': '删除',
+  'edit': '修改',
   'add-to-bookmarks': '添加到收藏夹',
   'please-input-token': '请输入 TOKEN',
   'login-fail': '登录失败请重新登录',
