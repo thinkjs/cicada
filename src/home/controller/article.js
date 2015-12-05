@@ -35,7 +35,7 @@ export default class extends Base {
       }
     }
 
-    let data = await this.model('article').order('id DESC').setRelation('tag').where(where).page(this.get('page'), 10).countSelect(true);
+    let data = await this.model('article').order('id DESC').where(where).page(this.get('page'), 10).countSelect(true);
 
     this.assign('articleList', data);
     this.assign('pagerData', data);
@@ -72,8 +72,6 @@ export default class extends Base {
    */
   async saveAction(){
     let data = this.post();
-    let service = this.service('spider');
-    let spiderInstance = new service(data.url);
 
     //article tags
     let tags = data.tag;
@@ -91,27 +89,38 @@ export default class extends Base {
       tag: tags,
     };
 
-    if(data.id == null || data.id === ""){
-      //add new article
-      let contents = await spiderInstance.run();
-      record.snapshot = {
-        content: contents.content,
-        content_clean: contents.cleanContent
-      }
-    }
-
     let result = await model.thenAdd(record, 
       {url: data.url}).catch(() => false);
-    
-    if(result.type === 'exist'){
-      record.id = result.id;
-      await model.update(record);
-    }
 
     if(result === false){
       return this.fail('SAVE_FAIL');
     }
+
+    record.id = result.id;
+
+    if(result.type === 'exist'){  
+      await model.update(record);
+    }
+
+    this.snapshot(record.id, data.url);
+
     this.success();
+  }
+  snapshot(article_id, url){
+    let service = this.service('spider');
+    let spiderInstance = new service(url);
+    think.await('save_snapshot_'+article_id, ()=>{
+      return spiderInstance.run().then((contents) => {
+        let snapshot = {
+          article_id: article_id,
+          content: contents.content,
+          content_clean: contents.cleanContent
+        }
+        return this.model('snapshot').thenAdd(snapshot, {
+          article_id: article_id
+        });
+      });
+    });
   }
   /**
    * delete action
