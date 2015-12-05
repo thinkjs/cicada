@@ -13,8 +13,8 @@
         <p class="summary"><%-item.summary.replace(/\n/g, '<br />')%></p>
         <%if(!think.isEmpty(item.tag)){%>
           <p class="tags">
-            <%-_('tags-name')%><%item.tag.forEach(function(tag){%>
-            <%=tag.name%>
+            <%-_('tags-name')%><%item.tag.forEach(function(tag,i){%>
+              <a class="tag" href="/?keyword=tag%3A<%=tag.name%>"><%=tag.name%></a>
             <%})%>
           </p>
           <%}%>
