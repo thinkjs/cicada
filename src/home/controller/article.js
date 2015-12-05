@@ -81,11 +81,8 @@ export default class extends Base {
       {url: data.url}).catch(() => false);
     
     if(result.type === 'exist'){
-      let findData = await model.where({url: data.url}).find();
-      if(findData){
-        record.id = findData.id;
-        await model.update(record);
-      }
+      record.id = result.id;
+      await model.update(record);
     }
 
     if(result === false){
