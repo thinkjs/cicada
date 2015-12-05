@@ -109,16 +109,14 @@ export default class extends Base {
   snapshot(article_id, url){
     let service = this.service('spider');
     let spiderInstance = new service(url);
-    think.await('save_snapshot_'+article_id, ()=>{
-      return spiderInstance.run().then((contents) => {
-        let snapshot = {
-          article_id: article_id,
-          content: contents.content,
-          content_clean: contents.cleanContent
-        }
-        return this.model('snapshot').thenAdd(snapshot, {
-          article_id: article_id
-        });
+    return spiderInstance.run().then((contents) => {
+      let snapshot = {
+        article_id: article_id,
+        content: contents.content,
+        content_clean: contents.cleanContent
+      }
+      return this.model('snapshot').thenAdd(snapshot, {
+        article_id: article_id
       });
     });
   }
