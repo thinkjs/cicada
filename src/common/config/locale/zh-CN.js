@@ -1,6 +1,7 @@
 'use strict';
 
 export default {
+  'website-title': '我的收藏',
   'favorite-articles': '收藏文章',
   'article-title': '文章标题',
   'article-url': '文章 URL',

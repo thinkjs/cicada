@@ -1,6 +1,7 @@
 'use strict';
 
 export default {
+  'website-title': 'My favorites',
   'favorite-articles': 'Favorite Articles',
   'article-title': 'Title',
   'article-url': 'URL',

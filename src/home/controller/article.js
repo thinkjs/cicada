@@ -39,7 +39,6 @@ export default class extends Base {
     let model = this.model('article');
     let findData = await model.where({id: id}).find();
     
-    delete findData.id;
     delete findData.snapshot;
     delete findData.create_time;
 
@@ -56,7 +55,6 @@ export default class extends Base {
     let data = this.post();
     let service = this.service('spider');
     let spiderInstance = new service(data.url);
-    let contents = await spiderInstance.run();
 
     //article tags
     let tags = data.tag;
@@ -72,11 +70,17 @@ export default class extends Base {
       title: data.title,
       summary: data.summary,
       tag: tags,
-      snapshot: {
+    };
+
+    if(data.id == null || data.id === ""){
+      //add new article
+      let contents = await spiderInstance.run();
+      record.snapshot = {
         content: contents.content,
         content_clean: contents.cleanContent
       }
-    };
+    }
+
     let result = await model.thenAdd(record, 
       {url: data.url}).catch(() => false);
     
