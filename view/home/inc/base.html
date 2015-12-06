@@ -7,7 +7,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="always">
 <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
-<title>{{config.website_title}}</title>
+<title>{{ _(config.website_title) }}</title>
 <link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet">
 <style>
 body{background-color: #eee}
@@ -22,6 +22,7 @@ p.summary{margin-top: 10px;}
 p.snapshot{font-size: 14px;}
 p a{border-bottom: 1px dashed #888;padding-bottom: 1px;}
 div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
+span.generating{color: #999;}
 .search-form{padding-bottom: 20px;}
 .copyright{text-align: center;line-height: 80px;font-size: 14px;color: #666}
 @media (min-width: 768px){
@@ -32,7 +33,7 @@ div.article-item{padding-bottom: 10px;border-bottom: 1px solid #ddd}
 </head>
 <body role="document">
   <div class="container theme-showcase" role="main">
-    <h1><a href="/">{{config.website_title}}</a></h1>
+    <h1><a href="/">{{ _(config.website_title) }}</a></h1>
     {% block body %}
     Hello World.
     {% endblock %}

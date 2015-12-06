@@ -29,7 +29,7 @@
       {{ _('tags-name') }}
       {% set comma = joiner() %}
       {% for tag in item.tag -%}
-        {{ comma() }} {{ tag.name }}
+        {{ comma() }} <a href="/?keyword=tag%3A{{tag.name}}" class="tag">{{ tag.name }}</a>
       {%- endfor %}
     </p>
     {% endif %}
@@ -37,8 +37,17 @@
       <a href="{{ item.url }}" target="_blank">
         {{ _('origin-article') }}
       </a>
-      {{ _('snapshot') }} <a href="/article/snapshot?id={{ item.id }}" target="_blank"> {{ _('full-edition') }}</a>,
+      {{ _('snapshot') }}
+      {% if item.snapshot.id %}
+      <a href="/article/snapshot?id={{ item.id }}" target="_blank"> {{ _('full-edition') }}</a>,
       <a href="/article/snapshot?id={{ item.id }}&type=clean" target="_blank"> {{ _('concise-edition') }}</a>
+      {% else %}
+      <span class="generating">{{ _('generating') }}</span>
+      <script>setTimeout(location.reload, 5000)</script>
+      {% endif %}
+      {% if isLogin %}
+      | <a href="/article/edit?id={{item.id}}" target="_blank">{{_('edit')}}</a> | <a href="/article/delete?id={{item.id}}" onClick="return confirm('{{_('confirm-delete')}}')">{{_('delete')}}</a>
+      {% endif %}
     </p>
   </div>
   {% endfor %}
