@@ -1,7 +1,7 @@
 {
   "name": "thinkjs-application",
   "description": "application created by thinkjs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "start": "node www/development.js",
     "compile": "babel --loose all --optional runtime --stage 0 --modules common src/ --out-dir app/ --retain-lines",
