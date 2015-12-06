@@ -1,6 +1,7 @@
 'use strict';
 
 export default {
+  'website-title': 'My favorites',
   'favorite-articles': 'Favorite Articles',
   'article-title': 'Title',
   'article-url': 'URL',
@@ -21,6 +22,8 @@ export default {
   'login': 'Login',
   'logout': 'Logout',
   'delete': 'Delete',
+  'edit': 'Edit',
+  'generating': 'Generating...',
   'add-to-bookmarks': 'Add to bookmarks',
   'please-input-token': 'Please input token',
   'login-fail': 'Login Fail!',

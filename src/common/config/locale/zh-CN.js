@@ -1,6 +1,7 @@
 'use strict';
 
 export default {
+  'website-title': '我的收藏',
   'favorite-articles': '收藏文章',
   'article-title': '文章标题',
   'article-url': '文章 URL',
@@ -21,6 +22,8 @@ export default {
   'login': '登录',
   'logout': '注销',
   'delete': '删除',
+  'edit': '修改',
+  'generating': '生成中...',
   'add-to-bookmarks': '添加到收藏夹',
   'please-input-token': '请输入 TOKEN',
   'login-fail': '登录失败请重新登录',
