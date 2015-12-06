@@ -40,8 +40,8 @@ export default class extends Base {
     this.assign('articleList', data);
     this.assign('pagerData', data);
     this.assign('isLogin', this.cookie('token') === this.config('token'));
+    this.assign('think', think);
     this.assign('bookmarks', 'javascript:void%20function(e%2Ct%2Cn%2Cr%2Ci%2Cs%2Co%2Cu)%7Bn%3Dlocation.href%2Cr%3Dt.title%2Ci%3D%22%22%2B(e.getSelection%3Fe.getSelection()%3At.getSelection%3Ft.getSelection()%3At.selection.createRange().text)%3Bif(!i)%7Bo%3Dt.getElementsByTagName(%22meta%22)%3Bfor(var%20a%3D0%3Ba%3Co.length%3Ba%2B%2B)u%3Do%5Ba%5D%2Cu%26%26u.name.toLowerCase()%3D%3D%3D%22description%22%26%26(i%3Du.content)%7Ds%3DencodeURIComponent%3Bvar%20f%3D%22http%3A%2F%2F'+this.http.host+'%2Farticle%2Fadd%3Ftitle%3D%22%2Bs(r)%2B%22%26url%3D%22%2Bs(n)%2B%22%26summary%3D%22%2Bs(i)%3Be.open(f%2C%22_blank%22%2C%22scrollbars%3Dno%2Cwidth%3D800%2Cheight%3D500%2Cleft%3D75%2Ctop%3D20%2Cstatus%3Dno%2Cresizable%3Dyes%22)%7D(window%2Cdocument)');
-
     return this.display();
   }
   /**
@@ -57,7 +57,7 @@ export default class extends Base {
     let {id} = this.get();
     let model = this.model('article');
     let findData = await model.where({id: id}).find();
-    
+
     delete findData.snapshot;
     delete findData.create_time;
 
@@ -89,7 +89,7 @@ export default class extends Base {
       tag: tags,
     };
 
-    let result = await model.thenAdd(record, 
+    let result = await model.thenAdd(record,
       {url: data.url}).catch(() => false);
 
     if(result === false){
@@ -98,7 +98,7 @@ export default class extends Base {
 
     record.id = result.id;
 
-    if(result.type === 'exist'){  
+    if(result.type === 'exist'){
       await model.update(record);
     }
 
