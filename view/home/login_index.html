@@ -1,11 +1,11 @@
-<%include inc/header.html%>
+{% extends './inc/base.html' %}
+
+{% block body %}
 <form action="/login" method="post" class="form-inline" style="text-align: center;">
   <div class="form-group">
-    <input type="password" name="token" placeholder="<%-_('please-input-token')%>" class="form-control">
+    <input type="password" name="token" placeholder="{{_('please-input-token')}}" class="form-control">
   </div>
-  <input type="submit" value="<%-_('login')%>" class="btn btn-primary"/>
-  <% if( loginFailed ) { %>
-    <p><%-_('login-fail')%></p>
-  <% } %>
+  <input type="submit" value="{{ _('login') }}" class="btn btn-primary"/>
+  {% if loginFailed %} <p> {{ _('login-fail') }} </p> {% endif %}
 </form>
-<%include inc/footer.html%>
+{% endblock %}
