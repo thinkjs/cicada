@@ -10,7 +10,7 @@ export default class extends think.logic.base {
    */
   indexAction() {
     if( this.config('visibility') !== 'public' && this.cookie('token') !== this.config('token') ) {
-      return this.redirect('/login/index');
+      return this.redirect('/user/login');
     }
   }
 }

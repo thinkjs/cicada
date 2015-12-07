@@ -60,8 +60,8 @@
 {% block footer %}
   {% if isLogin %}
     <a title="{{ _('drag-to-bookmark-bar') }}" href='{{bookmarks}}'>{{ _('add-to-bookmarks') }}</a>  |
-    <a href="/logout">{{ _('logout') }}</a>
+    <a href="/user/logout">{{ _('logout') }}</a>
   {% else %}
-    <a href="/login">{{ _('login') }}</a>
+    <a href="/user/login">{{ _('login') }}</a>
   {% endif %}
 {% endblock %}

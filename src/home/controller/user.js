@@ -3,10 +3,10 @@ import Base from './base.js';
 
 export default class extends Base {
   /**
-   * index action
+   * login action
    * @return {Promise} []
    */
-  indexAction(){
+  loginAction(){
     let loginFailed = false;
     if( this.isPost() ) {
       let token = this.post('token');
@@ -20,5 +20,11 @@ export default class extends Base {
     }
     this.assign('loginFailed', loginFailed);
     return this.display();
+  }
+  /**
+   * logout action
+   */
+  logoutAction(){
+    return this.redirect( this.referrer() );
   }
 }
