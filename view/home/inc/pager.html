@@ -40,7 +40,12 @@
     {% else %}
       <li><a href="{{ pageUrl() }}">1</a></li>
       <li class="disabled"><span>...</span></li>
-      {% for page in range(current-3, current) %}
+			{% if current < total - 3 %}
+				{% set urls = range(current-3, current) %}
+			{% else %}
+				{% set urls = range(total-6, current) %}
+			{% endif %}
+      {% for page in urls %}
         <li><a href="{{ pageUrl(page) }}">{{page}}</a></li>
       {% endfor %}
     {% endif %}
@@ -52,7 +57,12 @@
         <li><a href="{{ pageUrl(page) }}">{{page}}</a></li>
       {% endfor %}
     {% else %}
-      {% for page in range(current+1, current+4) %}
+			{% if current > 3 %}
+				{% set urls = range(current+1, current+4) %}
+			{% else %}
+				{% set urls = range(current+1, 8) %}
+			{% endif %}
+      {% for page in urls %}
         <li><a href="{{ pageUrl(page) }}">{{page}}</a></li>
       {% endfor %}
       <li class="disabled"><span>...</span></li>
