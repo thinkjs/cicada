@@ -12,7 +12,7 @@
   <div class="article-item">
     <h2>
       <a href="{{ item.url }}" target="_blank">
-        {{ item.title }}
+        {{ item.title | escape}}
       </a>
     </h2>
 
@@ -22,7 +22,7 @@
     </p>
     <p class="summary">
       <!--| replace( /\n/g, '<br />')-->
-      {{ item.summary }}
+      {{ item.summary | escape }}
     </p>
     {% if not think.isEmpty(item.tag) %}
     <p class="tags">

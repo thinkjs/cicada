@@ -30,6 +30,7 @@ export default {
   'bookmark-adding': 'Bookmark adding...',
   'confirm-delete': 'Delete it really ?',
   'drag-to-bookmark-bar': 'Drag url to bookmark bar',
+  'pagination-total': 'Totoal %s Records, total %s pages',
   'token-not-valid': 'Token not valid!',
   'TOKEN_INVALID': [1000, 'token invalid!'],
   'NEED_LOGIN': [1001, 'need login!'],

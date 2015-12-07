@@ -16,30 +16,6 @@ export default {
         env.addFilter("formatDate", function(datetime) {
           return moment(datetime).format('YYYY-MM-DD HH:mm:ss');
         });
-        env.addFilter("pageUrl", function(page, querys){
-          var htmlMaps = {
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quote;',
-            "'": '&#39;'
-          }
-          var escape_html = function (str) {
-            return (str + "").replace(/[<>'"]/g, function(a){
-              return htmlMaps[a];
-            })
-          }
-          var prefix = "?";
-          var querys = [];
-          for(var name in querys){
-            if(name == 'page') continue;
-            querys.push(escape_html(name) + '=' + escape_html(querys[name]));
-          }
-          prefix += querys.join("&");
-          if(querys.length){
-            prefix += "&";
-          }
-          return `${prefix}page=${page}`;
-        });
       }
     }
   }
