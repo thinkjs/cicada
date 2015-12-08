@@ -3,4 +3,5 @@ app/
 pm2.dev.json
 sqlite.dev
 src/common/config/env/development.js
+src/common/config/env/production.js
 sftp-config.json
