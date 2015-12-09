@@ -6,7 +6,7 @@ Cicada can crawl content of target url to prevent can not view the contents of t
 
 Tips: Spider can't crawl page need login.
 
-![](http://p1.qhimg.com/d/inn/3984d861/11.jpg)
+![](http://p0.qhimg.com/t012dd76cf28f85d67a.png)
 
 ## Installation
 

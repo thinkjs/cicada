@@ -31,6 +31,8 @@ export default {
   'confirm-delete': '确定删除该收藏？',
   'drag-to-bookmark-bar': '拖拽此链接到收藏栏',
   'pagination-total': '共有 %s 条记录，共 %s 页',
+  'prev-page': '上一页',
+  'next-page': '下一页',
   'TOKEN_INVALID': [1000, '密码错误'],
   'NEED_LOGIN': [1001, '需要登陆'],
   'SAVE_FAIL': [1002, '保存失败'],
