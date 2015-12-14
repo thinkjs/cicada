@@ -7,7 +7,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="referrer" content="always">
 <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
-<title>{{ _(config.website_title) }}</title>
+<title>{{ config.website_title }}</title>
 <link href="/static/module/bootstrap/css/bootstrap.css" rel="stylesheet">
 <style>
 body{background-color: #eee}
@@ -33,7 +33,7 @@ span.generating{color: #999;}
 </head>
 <body role="document">
   <div class="container theme-showcase" role="main">
-    <h1><a href="/">{{ _(config.website_title) }}</a></h1>
+    <h1><a href="/">{{ config.website_title }}</a></h1>
     {% block body %}
     Hello World.
     {% endblock %}

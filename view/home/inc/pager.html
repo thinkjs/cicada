@@ -14,7 +14,7 @@
 			{%- endif -%}
 		{%- endfor -%}
 
-		{%-  if params.length > 0  and hasAddQueery-%}&{%- endif -%}
+		{%- if hasAddQueery-%}&{%- endif -%}
 	{%- endif -%}
   {{'page='+page}}
 {% endmacro %}
