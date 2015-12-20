@@ -1,0 +1,29 @@
+{% extends './inc/base.html' %}
+
+{% block head %}
+<script src="/static/module/jquery/jquery-2.1.4.js"></script>
+<script src="/static/module/bootstrap/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block body %}
+<ul class="nav nav-tabs" role="tablist">
+   <li role="presentation" class="active"><a href="#widget" aria-controls="widget" data-toggle="tab">挂件</a></li>
+</ul>
+<div class="tab-content">
+	<div role="tabpanel" id="widget" class="tab-pane active">
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-6">
+				<p>复制以下代码到你的网站中：</p>
+				<textarea style="width:100%;height:200px;resize:none;"><div id="cicada-widget"></div><script src="{{config.protocol}}://{{http.host}}/widget"></script></textarea>
+			</div>
+			<div class="col-md-6">
+				<div id="cicada-widget"></div>
+				<script src="{{config.protocol}}://{{http.host}}/widget"></script>
+			</div>
+		</div>
+	</div>
+	<div role="tabpanel" id="password" class="tab-pane">
+		test
+	</div>
+</div>
+{% endblock %}
