@@ -30,7 +30,7 @@ header.snapshot a{color: blue;text-decoration: none;}
     {% endif %}
   </header>
   <div class="snapshot-content">
-    {{content}}
+    {{content | safe}}
   </div>
 </body>
 </html>

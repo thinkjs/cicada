@@ -24,11 +24,11 @@
 
 {% if total > 1 %}
 <ul class="pagination">
-  {% if not pagerData.hideDesc %}
+  <!-- {% if not pagerData.hideDesc %}
     <li class="disabled">
       <span>{{ _('pagination-total', pagerData.count, total) }}</span>
     </li>
-  {% endif %}
+  {% endif %} -->
   {% if current > 1 %}
     <li class="prev">
       <a href="{{ pageUrl(current - 1) }}">{{ _('prev-page') }}</a>
