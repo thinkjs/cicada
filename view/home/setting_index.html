@@ -7,10 +7,52 @@
 
 {% block body %}
 <ul class="nav nav-tabs" role="tablist">
-   <li role="presentation" class="active"><a href="#widget" aria-controls="widget" data-toggle="tab">挂件</a></li>
+  <li role="presentation" class="active"><a href="#base" aria-controls="widget" data-toggle="tab">基本</a></li>
+  <li role="presentation"><a href="#password" aria-controls="widget" data-toggle="tab">密码</a></li>
+   <li role="presentation"><a href="#widget" aria-controls="widget" data-toggle="tab">挂件</a></li>
+   <li role="presentation"><a href="#kindle" aria-controls="widget" data-toggle="tab">发送到 Kindle</a></li>
 </ul>
 <div class="tab-content">
-	<div role="tabpanel" id="widget" class="tab-pane active">
+  <div role="tabpanel" id="base" class="tab-pane active">
+    <div class="row" style="margin-top: 20px">
+      <form action="/setting/save" method="post" class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-xs-2">网站标题：</label>
+          <div class="col-xs-5"><input type="text" name="website_title" class="form-control" value="{{website_title}}" /></div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-xs-2">是否公开：</label>
+          <div class="radio-group col-xs-5">
+            <label><input type="radio" name="visibility" value="public" {% if visibility=="public" %}checked{%endif%}>公开</label>
+            <label><input type="radio" name="visibility" value="private" {% if visibility=="private" %}checked{%endif%}>隐私</label>
+          </div>
+        </div>
+        <div class="form-group col-xs-7 text-center">
+          <button type="submit" class="btn btn-primary">确认</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div role="tabpanel" id="password" class="tab-pane">
+    <div class="row" style="margin-top: 20px">
+      <form action="/setting/save" method="post" class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-xs-2">旧密码：</label>
+          <div class="col-xs-5"><input type="password" name="oldPassword" class="form-control"/></div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-xs-2">新密码：</label>
+          <div class="col-xs-5"><input type="password" name="newPassword" class="form-control" /></div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-xs-2">再次输入：</label>
+          <div class="col-xs-5"><input type="password" name="newPasswordAgain" class="form-control" /></div>
+        </div>
+        <div class="form-group col-xs-7 text-center"><button type="submit" class="btn btn-primary" style="100%">确认</button></div>
+      </form>
+    </div>
+  </div>
+	<div role="tabpanel" id="widget" class="tab-pane">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-6">
 				<p>复制以下代码到你的网站中：</p>
@@ -22,8 +64,16 @@
 			</div>
 		</div>
 	</div>
-	<div role="tabpanel" id="password" class="tab-pane">
-		test
+	<div role="tabpanel" id="kindle" class="tab-pane">
+    <div class="row" style="margin-top: 20px">
+		  <p>1. 在 <a href="https://www.amazon.cn/mn/dcw/myx.html#/home/settings/payment" target="_blank">个人文档设置</a> 设置中添加 <code>send@cicada.org</code> 到已认可的发件人邮箱列表中。</p>
+      <div>2. 设置你的 Kindle 发送邮箱：
+        <form action="/setting/save" method="post" class="form-inline" style="display:inline;">
+          <input type="email" name="kindle" value="{{kindle}}" class="form-control"/>
+          <button type="submit" class="btn btn-primary">确认</button>
+        </form>
+      </div>
+    </div>
 	</div>
 </div>
 {% endblock %}

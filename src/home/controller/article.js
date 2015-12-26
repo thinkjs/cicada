@@ -147,7 +147,20 @@ export default class extends Base {
     let content = snap[field];
     this.assign('content', content);
     this.assign('info', info);
+    this.assign('isLogin', this.cookie('token') === this.config('token'));
     this.assign('prefix', (this.config('protocol') || 'http') + '://' + this.http.host);
     this.display();
+  }
+
+  async kindleAction() {
+    let article_id = this.get('id');
+    let snap = await this.model('snapshot').where({article_id}).field('content').find();
+    if(think.isEmpty(snap)) {
+      return this.fail('ID_NOT_EXIST');
+    }
+    let service = this.service('kindle');
+    let kindleInstance = new service(this.config('kindle'));
+    console.log(this.config('kindle'));
+    return kindleInstance.run(snap.content).then(this.success.bind(this)).catch(this.fail.bind(this));
   }
 }

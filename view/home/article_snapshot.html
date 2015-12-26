@@ -28,6 +28,7 @@ header.snapshot a{color: blue;text-decoration: none;}
     {% else %}
       <a href="{{prefix}}/article/snapshot?id={{info.id}}&type=clean">{{_('concise-edition')}}</a>
     {% endif %}
+    {% if isLogin %}<a href="{{prefix}}/article/kindle?id={{info.id}}">发送到 Kindle</a>{% endif %}
   </header>
   <div class="snapshot-content">
     {{content | safe}}
