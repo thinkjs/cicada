@@ -136,10 +136,6 @@ export default class extends think.service.base {
     }
     let content = await this.getContent();
     content = this.setBaseMeta(content);
-    let cleanContent = this.getCleanContent(content);
-    return {
-      content,
-      cleanContent
-    }
+    return content;
   }
 }

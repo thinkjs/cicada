@@ -36,12 +36,26 @@ export default class extends Base {
     }
 
     let data = await this.model('article').order('id DESC').where(where).page(this.get('page'), 10).countSelect(true);
+    let bookmarksUrl = `void function(e, t, n, r, c, i, s, o, u) {
+    n = location.href,
+    r = t.title,
+    c = t.documentElement.outerHTML,
+    i = "" + (e.getSelection ? e.getSelection() : t.getSelection ? t.getSelection() : t.selection.createRange().text);
+    if (!i) {
+        o = t.getElementsByTagName("meta");
+        for (var a = 0; a < o.length; a++) u = o[a],
+        u && u.name.toLowerCase() === "description" && (i = u.content)
+    }
+    s = encodeURIComponent;
+    var f = "${this.config('protocol')}://${this.http.host}/article/add?title=" + s(r) + "&url=" + s(n) + "&summary=" + s(i) + "#content=" + s(c);
+    e.open(f, "_blank", "scrollbars=no,width=800,height=500,left=75,top=20,status=no,resizable=yes")
+} (window, document);`;
 
     this.assign('articleList', data);
     this.assign('pagerData', data);
     this.assign('isLogin', this.cookie('token') === this.config('token'));
     this.assign('think', think);
-    this.assign('bookmarks', 'javascript:void%20function(e%2Ct%2Cn%2Cr%2Ci%2Cs%2Co%2Cu)%7Bn%3Dlocation.href%2Cr%3Dt.title%2Ci%3D%22%22%2B(e.getSelection%3Fe.getSelection()%3At.getSelection%3Ft.getSelection()%3At.selection.createRange().text)%3Bif(!i)%7Bo%3Dt.getElementsByTagName(%22meta%22)%3Bfor(var%20a%3D0%3Ba%3Co.length%3Ba%2B%2B)u%3Do%5Ba%5D%2Cu%26%26u.name.toLowerCase()%3D%3D%3D%22description%22%26%26(i%3Du.content)%7Ds%3DencodeURIComponent%3Bvar%20f%3D%22http%3A%2F%2F'+this.http.host+'%2Farticle%2Fadd%3Ftitle%3D%22%2Bs(r)%2B%22%26url%3D%22%2Bs(n)%2B%22%26summary%3D%22%2Bs(i)%3Be.open(f%2C%22_blank%22%2C%22scrollbars%3Dno%2Cwidth%3D800%2Cheight%3D500%2Cleft%3D75%2Ctop%3D20%2Cstatus%3Dno%2Cresizable%3Dyes%22)%7D(window%2Cdocument)');
+    this.assign('bookmarks', 'javascript:'+encodeURIComponent(bookmarksUrl));
     return this.display();
   }
   /**
@@ -97,27 +111,21 @@ export default class extends Base {
     }
 
     record.id = result.id;
-
     if(result.type === 'exist'){
       await model.update(record);
     }
 
-    this.snapshot(record.id, data.url);
-
+    this.snapshot(record.id, data.url, data.content);
     this.success();
   }
-  snapshot(article_id, url){
+
+  snapshot(article_id, url, rawContent){
     let service = this.service('spider');
     let spiderInstance = new service(url);
-    return spiderInstance.run().then((contents) => {
-      let snapshot = {
-        article_id: article_id,
-        content: contents.content,
-        content_clean: contents.cleanContent
-      }
-      return this.model('snapshot').thenAdd(snapshot, {
-        article_id: article_id
-      });
+    let content_clean = spiderInstance.getCleanContent(rawContent);
+    return spiderInstance.run().then( content => {
+      if(content === 'error!') content = rawContent;
+      return this.model('snapshot').thenAdd({article_id, content, content_clean}, {article_id})
     });
   }
   /**
@@ -125,9 +133,10 @@ export default class extends Base {
    */
   async deleteAction() {
     let id = this.get('id');
-    let model = this.model('article');
-    let result = await model.where({id}).delete();
-    if( !result ) return this.fail('DELETE_FAIL');
+    let articleResult = await this.model('article').where({id}).delete();
+    let snapshotResult = await this.model('snapshot').where({article_id: id}).delete();
+
+    if( !articleResult || !snapshotResult) return this.fail('DELETE_FAIL');
     this.redirect( this.referrer() || '/' );
   }
   /**
