@@ -43,6 +43,7 @@ export default class extends think.service.base {
       strictSSL: false,
       timeout: this.timeout * 1000,
       encoding: null,
+      gzip: true,
       headers: {
         'User-Agent': this.userAgent
       }
