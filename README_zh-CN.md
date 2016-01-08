@@ -6,7 +6,7 @@ A favorite article collections application based on Node.js & [ThinkJS](https://
 
 `注`：如果原页面被墙了，抓取可能会失败。不能抓取需要登录的页面。
 
-![](http://p1.qhimg.com/d/inn/3984d861/11.jpg)
+![](http://p0.qhimg.com/t016de9103f83648408.png)
 
 ## install
 
@@ -88,8 +88,4 @@ export default {
 
 ## 添加书签
 
-```js
-javascript:void function(e%2C t%2C n%2C r%2C c%2C i%2C s%2C o%2C u) %7B%0A    n %3D location.href%2C%0A    r %3D t.title%2C%0A    c %3D t.documentElement.outerHTML%2C%0A    i %3D "" %2B (e.getSelection %3F e.getSelection() %3A t.getSelection %3F t.getSelection() %3A t.selection.createRange().text)%3B%0A    if (!i) %7B%0A        o %3D t.getElementsByTagName("meta")%3B%0A        for (var a %3D 0%3B a < o.length%3B a%2B%2B) u %3D o%5Ba%5D%2C%0A        u %26%26 u.name.toLowerCase() %3D%3D%3D "description" %26%26 (i %3D u.content)%0A    %7D%0A    s %3D encodeURIComponent%3B%0A    var f %3D "http%3A%2F%2Flocalhost%3A5678%2Farticle%2Fadd%3Ftitle%3D" %2B s(r) %2B "%26url%3D" %2B s(n) %2B "%26summary%3D" %2B s(i) %2B "%23content%3D" %2B s(c)%3B%0A    e.open(f%2C "_blank"%2C "scrollbars%3Dno%2Cwidth%3D800%2Cheight%3D500%2Cleft%3D75%2Ctop%3D20%2Cstatus%3Dno%2Cresizable%3Dyes")%0A%7D (window%2C document)%3B
-```
-
-将上面代码中的 `localhost:5678` 改为你的域名，然后选择代码并拖拽到浏览器书签中。
+在网站底部将收藏书签拖拽到浏览器书签栏中。
