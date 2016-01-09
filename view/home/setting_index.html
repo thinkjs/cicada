@@ -11,6 +11,7 @@
   <li role="presentation"><a href="#password" aria-controls="widget" data-toggle="tab">{{_('password')}}</a></li>
    <li role="presentation"><a href="#widget" aria-controls="widget" data-toggle="tab">{{_('widget')}}</a></li>
    <li role="presentation"><a href="#kindle" aria-controls="widget" data-toggle="tab">{{_('send-to-kindle')}}</a></li>
+   <li role="presentation"><a href="#about" aria-controls="widget" data-toggle="tab">{{_('about')}}</a></li>
 </ul>
 <div class="tab-content">
   <div role="tabpanel" id="base" class="tab-pane active">
@@ -75,5 +76,34 @@
       </div>
     </div>
 	</div>
+  <div role="tabpanel" id="about" class="tab-pane">
+    <div class="row" style="margin-top: 20px;text-align: center;">
+      <p>Cicada</p>
+      <p>版本：{{version}}
+      {% if lastVersion %}
+      （最新版本为 {{lastVersion}}，<a href="javascript:void(0)" class="update-btn">点击此执行自动更新</a>）
+      {% endif %}
+      </p>
+      <p>作者：<a href="https://github.com/welefen">@welefen</a>, <a href="https://github.com/lizheming">@lizheming</a>, <a href="https://github.com/akria-cn">@akira-cn</a>, <a href="https://github.com/qgy18">@qgy18</a></p>
+    </div>
+  </div>
 </div>
+<script>
+$(function() {
+  $('.update-btn').click(function() {
+    var $tar = $(this), originalText = $tar.text();
+    $.ajax({
+      url: '/setting/update',
+      method: 'get',
+      success: function() {
+        alert('更新成功请自行重启服务');
+      },
+      error: function() {
+        console.log(arguments);
+        alert('出现未知错误请重新更新或者尝试手动更新');
+      }
+    })
+  })
+})
+</script>
 {% endblock %}

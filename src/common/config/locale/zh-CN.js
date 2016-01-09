@@ -42,6 +42,7 @@ export default {
   'basic': '基本',
   'password': '密码',
   'widget': '挂件',
+  'about': '关于',
   'send-to-kindle': '发送到 Kindle',
   'setting-old_password': '旧密码：',
   'setting-new_password': '新密码：',

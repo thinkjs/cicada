@@ -42,6 +42,7 @@ export default {
   'basic': 'Basic',
   'password': 'Password',
   'widget': 'Widget',
+  'about': 'About',
   'send-to-kindle': 'Send to Kindle',
   'setting-old_password': 'Old Password: ',
   'setting-new_password': 'New Password: ',
