@@ -33,7 +33,7 @@
     <li class="prev">
       <a href="{{ pageUrl(current - 1) }}">{{ _('prev-page') }}</a>
     </li>
-    {% if current < 6 %}
+    {% if current <=  6 %}
       {% for page in range(1, current) %}
         <li><a href="{{ pageUrl(page) }}">{{page}}</a></li>
       {% endfor %}
@@ -43,7 +43,7 @@
 			{% if current < total - 3 %}
 				{% set urls = range(current-3, current) %}
 			{% else %}
-				{% set urls = range(total-6, current) %}
+				{% set urls = range(total-4, current) %}
 			{% endif %}
       {% for page in urls %}
         <li><a href="{{ pageUrl(page) }}">{{page}}</a></li>
@@ -52,7 +52,7 @@
   {% endif %}
   <li class="current disabled"><a href="{{ pageUrl(current) }}">{{current}}</a></li>
   {% if current < total %}
-    {% if current > (total - 5) %}
+    {% if current >= (total - 5) %}
       {% for page in range(current+1, total+1) %}
         <li><a href="{{ pageUrl(page) }}">{{page}}</a></li>
       {% endfor %}
@@ -60,7 +60,7 @@
 			{% if current > 3 %}
 				{% set urls = range(current+1, current+4) %}
 			{% else %}
-				{% set urls = range(current+1, 8) %}
+				{% set urls = range(current+1, 6) %}
 			{% endif %}
       {% for page in urls %}
         <li><a href="{{ pageUrl(page) }}">{{page}}</a></li>
