@@ -7,28 +7,29 @@
 
 {% block body %}
 <ul class="nav nav-tabs" role="tablist">
-  <li role="presentation" class="active"><a href="#base" aria-controls="widget" data-toggle="tab">基本</a></li>
-  <li role="presentation"><a href="#password" aria-controls="widget" data-toggle="tab">密码</a></li>
-   <li role="presentation"><a href="#widget" aria-controls="widget" data-toggle="tab">挂件</a></li>
-   <li role="presentation"><a href="#kindle" aria-controls="widget" data-toggle="tab">发送到 Kindle</a></li>
+  <li role="presentation" class="active"><a href="#base" aria-controls="widget" data-toggle="tab">{{_('basic')}}</a></li>
+  <li role="presentation"><a href="#password" aria-controls="widget" data-toggle="tab">{{_('password')}}</a></li>
+   <li role="presentation"><a href="#widget" aria-controls="widget" data-toggle="tab">{{_('widget')}}</a></li>
+   <li role="presentation"><a href="#kindle" aria-controls="widget" data-toggle="tab">{{_('send-to-kindle')}}</a></li>
+   <li role="presentation"><a href="#about" aria-controls="widget" data-toggle="tab">{{_('about')}}</a></li>
 </ul>
 <div class="tab-content">
   <div role="tabpanel" id="base" class="tab-pane active">
     <div class="row" style="margin-top: 20px">
       <form action="/setting/save" method="post" class="form-horizontal">
         <div class="form-group">
-          <label class="control-label col-xs-2">网站标题：</label>
+          <label class="control-label col-xs-4">{{_('setting-website_title')}}</label>
           <div class="col-xs-5"><input type="text" name="website_title" class="form-control" value="{{website_title}}" /></div>
         </div>
         <div class="form-group">
-          <label class="control-label col-xs-2">是否公开：</label>
+          <label class="control-label col-xs-4">{{_('setting-is_public')}}</label>
           <div class="radio-group col-xs-5">
-            <label><input type="radio" name="visibility" value="public" {% if visibility=="public" %}checked{%endif%}>公开</label>
-            <label><input type="radio" name="visibility" value="private" {% if visibility=="private" %}checked{%endif%}>隐私</label>
+            <label style="margin-top:8px;"><input type="radio" name="visibility" value="public" {% if visibility=="public" %}checked{%endif%}>{{_('public')}}</label>
+            <label style="margin-top:8px;"><input type="radio" name="visibility" value="private" {% if visibility=="private" %}checked{%endif%}>{{_('private')}}</label>
           </div>
         </div>
-        <div class="form-group col-xs-7 text-center">
-          <button type="submit" class="btn btn-primary">确认</button>
+        <div class="form-group col-xs-12 text-center">
+          <button type="submit" class="btn btn-primary">{{_('ok')}}</button>
         </div>
       </form>
     </div>
@@ -37,25 +38,25 @@
     <div class="row" style="margin-top: 20px">
       <form action="/setting/save" method="post" class="form-horizontal">
         <div class="form-group">
-          <label class="control-label col-xs-2">旧密码：</label>
+          <label class="control-label col-xs-4">{{_('setting-old_password')}}</label>
           <div class="col-xs-5"><input type="password" name="oldPassword" class="form-control"/></div>
         </div>
         <div class="form-group">
-          <label class="control-label col-xs-2">新密码：</label>
+          <label class="control-label col-xs-4">{{_('setting-new_password')}}</label>
           <div class="col-xs-5"><input type="password" name="newPassword" class="form-control" /></div>
         </div>
         <div class="form-group">
-          <label class="control-label col-xs-2">再次输入：</label>
+          <label class="control-label col-xs-4">{{_('setting-repeat_password')}}</label>
           <div class="col-xs-5"><input type="password" name="newPasswordAgain" class="form-control" /></div>
         </div>
-        <div class="form-group col-xs-7 text-center"><button type="submit" class="btn btn-primary" style="100%">确认</button></div>
+        <div class="form-group col-xs-12 text-center"><button type="submit" class="btn btn-primary" style="100%">{{_('ok')}}</button></div>
       </form>
     </div>
   </div>
 	<div role="tabpanel" id="widget" class="tab-pane">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-6">
-				<p>复制以下代码到你的网站中：</p>
+				<p>{{_('setting-copy-code-to-your-site')}}</p>
 				<textarea style="width:100%;height:200px;resize:none;"><div id="cicada-widget"></div><script src="{{config.protocol}}://{{http.host}}/widget"></script></textarea>
 			</div>
 			<div class="col-md-6">
@@ -66,14 +67,43 @@
 	</div>
 	<div role="tabpanel" id="kindle" class="tab-pane">
     <div class="row" style="margin-top: 20px">
-		  <p>1. 在 <a href="https://www.amazon.cn/mn/dcw/myx.html#/home/settings/payment" target="_blank">个人文档设置</a> 设置中添加 <code>send@cicada.org</code> 到已认可的发件人邮箱列表中。</p>
-      <div>2. 设置你的 Kindle 发送邮箱：
+      <p>1. {{_('setting-add_trust_to_email_list') | safe}}</p>
+      <div>2. {{_('setting-set_your_kindle_email')}}
         <form action="/setting/save" method="post" class="form-inline" style="display:inline;">
           <input type="email" name="kindle" value="{{kindle}}" class="form-control"/>
-          <button type="submit" class="btn btn-primary">确认</button>
+          <button type="submit" class="btn btn-primary">{{_('ok')}}</button>
         </form>
       </div>
     </div>
 	</div>
+  <div role="tabpanel" id="about" class="tab-pane">
+    <div class="row" style="margin-top: 20px;text-align: center;">
+      <p>Cicada</p>
+      <p>版本：{{version}}
+      {% if lastVersion %}
+      （最新版本为 {{lastVersion}}，<a href="javascript:void(0)" class="update-btn">点击此执行自动更新</a>）
+      {% endif %}
+      </p>
+      <p>作者：<a href="https://github.com/welefen">@welefen</a>, <a href="https://github.com/lizheming">@lizheming</a>, <a href="https://github.com/akria-cn">@akira-cn</a>, <a href="https://github.com/qgy18">@qgy18</a></p>
+    </div>
+  </div>
 </div>
+<script>
+$(function() {
+  $('.update-btn').click(function() {
+    var $tar = $(this), originalText = $tar.text();
+    $.ajax({
+      url: '/setting/update',
+      method: 'get',
+      success: function() {
+        alert('更新成功请自行重启服务');
+      },
+      error: function() {
+        console.log(arguments);
+        alert('出现未知错误请重新更新或者尝试手动更新');
+      }
+    })
+  })
+})
+</script>
 {% endblock %}
