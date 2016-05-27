@@ -18,6 +18,8 @@ cd cicada;
 npm install;
 ```
 
+Tip: If you want to use kinle push service, you need `npm install html-pdf` at the end.
+
 ## Configuration
 
 Modify `src/common/config/config.js`:

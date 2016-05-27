@@ -18,6 +18,8 @@ cd cicada;
 npm install;
 ```
 
+注：Kindle 推送服务需要使用 html-pdf 模块，它依赖的 phantomJS 模块因为网络问题会导致安装很慢，所以我默认把这个模块从依赖中去掉了，有需要 Kindle 推送服务的可以自行 `npm install html-pdf` 安装。
+
 ## 修改配置
 
 修改配置文件 `src/common/config/config.js` 中的值：
@@ -93,5 +95,3 @@ javascript:void%20function(e%2Ct%2Cn%2Cr%2Ci%2Cs%2Co%2Cu)%7Bn%3Dlocation.href%2C
 ```
 
 将上面代码中的 `localhost:5678` 改为你的域名，然后选择代码并拖拽到浏览器书签中。
-
-
