@@ -6,7 +6,7 @@
     "start": "node www/development.js",
     "compile": "babel --loose all --optional runtime --stage 0 --modules common src/ --out-dir app/ --retain-lines",
     "watch-compile": "npm run compile -- --watch",
-    "watch": "npm run watch-compile",
+    "watch": "npm run watch-compile"
   },
   "dependencies": {
     "babel": "5.8.21",
