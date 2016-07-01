@@ -43,6 +43,7 @@ export default class extends think.service.base {
       strictSSL: false,
       timeout: this.timeout * 1000,
       encoding: null,
+      gzip: true,
       headers: {
         'User-Agent': this.userAgent
       }
@@ -136,10 +137,6 @@ export default class extends think.service.base {
     }
     let content = await this.getContent();
     content = this.setBaseMeta(content);
-    let cleanContent = this.getCleanContent(content);
-    return {
-      content,
-      cleanContent
-    }
+    return content;
   }
 }

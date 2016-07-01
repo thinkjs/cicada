@@ -1,0 +1,25 @@
+{
+  "name": "thinkjs-application",
+  "description": "application created by thinkjs",
+  "version": "1.1.1",
+  "scripts": {
+    "start": "node www/development.js",
+    "compile": "babel --loose all --optional runtime --stage 0 --modules common src/ --out-dir app/ --retain-lines",
+    "watch-compile": "npm run compile -- --watch",
+    "watch": "npm run watch-compile"
+  },
+  "dependencies": {
+    "babel": "5.8.21",
+    "babel-runtime": "5.6.17",
+    "iconv-lite": "^0.4.13",
+    "moment": "^2.10.6",
+    "mv": "^2.1.1",
+    "node-readability": "^2.1.0",
+    "nodemailer": "^1.10.0",
+    "nunjucks": "^2.1.0",
+    "request": "^2.67.0",
+    "sqlite3": "^3.1.1",
+    "thinkjs": "2.0.x",
+    "unzip": "^0.1.11"
+  }
+}

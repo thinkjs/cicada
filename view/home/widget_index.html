@@ -1,0 +1,67 @@
+{%- set classname = 'cicada-widget-'+config.port -%}
+{%- set url = config.protocol + '://' + http.host -%}
+(function() {
+  var d = document, s = d.createElement('style');
+  var i = '<div class="{{classname}}"><div class="title">{{config.website_title | escape}}</div><ul>
+  {%- for article in articleList -%}
+    <li><a href="{{article.url}}" target="cicada">{{article.title | escape}}</a><datetime>{{article.create_time}}</datetime></li>
+  {%- endfor -%}
+</ul><div class="footer"> <a href="{{url}}" target="_blank">{{_('widget-more')}}</a> <span>power by <a href="https://github.com/thinkjs-team/cicada">cicada</a></div></div>';
+  s.innerHTML = '.{{classname}} {\
+  background: #A4D4E8;\
+  padding: 5px 10px;\
+  width: 100%;\
+}\
+.{{classname}} .title {\
+  font-size: 18px;\
+  font-weight: bold;\
+  margin-bottom: 5px;\
+  color: #265778;\
+}\
+.{{classname}} ul {\
+  list-style: none;\
+  margin: 0;\
+  padding: 0;\
+}\
+.{{classname}} ul li {\
+  padding: 5px 10px;\
+  background: #E1F2FA;\
+  border-radius: 2px;\
+}\
+.{{classname}} ul li + li {\
+  margin-top: 5px;\
+}\
+.{{classname}} ul li > a,\
+.{{classname}} ul li > a:hover,\
+.{{classname}} ul li > a:visited,\
+.{{classname}} ul li:focus {\
+  color: #4c4c4c;\
+}\
+.{{classname}} ul li > a:before {\
+  content: \'\';\
+  width: 5px;\
+  height: 5px;\
+  border-radius: 5px;\
+  display: inline-block;\
+  background: #A4D4E8;\
+  border: 1px solid #4c4c4c;\
+  margin-right: 5px;\
+}\
+.{{classname}} ul li > datetime {\
+  display: block;\
+  font-size: 12px;\
+  color: #ccc;\
+  font-family: Georgia, serif;\
+}\
+.{{classname}} .footer {\
+  color: #265778;\
+  font-size: 12px;\
+  padding: 10px 0 5px\
+}\
+.{{classname}} .footer span {\
+  font-style: italic;\
+  float: right;\
+}';
+  d.head.appendChild(s);
+  d.getElementById('cicada-widget').innerHTML = i;
+})();
