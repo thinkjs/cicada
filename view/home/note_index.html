@@ -1,0 +1,46 @@
+{% extends "./inc/base.html" %}
+
+{% block title %}
+<h1><a href="/?keyword=tag:{{ _('note-tag') }}">{{ _('article-note-title') }}</a></h1>
+{% endblock %}
+
+{% block body %}
+<div class="article-item">
+
+  <h2>
+    <a href="{{ item.url }}">
+      {{ item.title | escape }}
+    </a>
+  </h2>
+
+  <p class="summary">
+    <!--| replace( /\n/g, '<br />')-->
+    {{ item.summary | safe }}
+  </p>
+  {% if not think.isEmpty(item.tag) %}
+  <p class="tags">
+    {{ _('tags-name') }}
+    {% set comma = joiner() %}
+    {% for tag in item.tag -%}
+      {{ comma() }} <a href="/?keyword=tag%3A{{tag.name}}" class="tag">{{ tag.name }}</a>
+    {%- endfor %}
+  </p>
+  {% endif %}
+  <p class="snapshot">
+    {{ _('note-name') }}
+    <time> {{ item.create_time | formatDate }}</time>
+    {% if isLogin %}
+    | <a href="/article/edit?id={{item.id}}" target="_blank">{{_('edit')}}</a> | <a href="/article/delete?id={{item.id}}" onClick="return confirm('{{_('confirm-delete')}}')">{{_('delete')}}</a>
+    {% endif %}
+  </p>
+</div>
+{% endblock %}
+
+{% block footer %}
+  {% if isLogin %}
+    <a href="/setting">{{_('setting')}}</a> | 
+    <a href="/user/logout">{{ _('logout') }}</a>
+  {% else %}
+    <a href="/user/login">{{ _('login') }}</a>
+  {% endif %}
+{% endblock %}

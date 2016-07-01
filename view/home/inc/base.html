@@ -34,7 +34,9 @@ span.generating{color: #999;}
 </head>
 <body role="document">
   <div class="container theme-showcase" role="main">
+    {% block title %}
     <h1><a href="/">{{ config.website_title }}</a></h1>
+    {% endblock %}
     {% block body %}
     Hello World.
     {% endblock %}
