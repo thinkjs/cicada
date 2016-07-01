@@ -59,8 +59,8 @@
 
 {% block footer %}
   {% if isLogin %}
-    <a title="{{ _('drag-to-bookmark-bar') }}" href='{{bookmarks}}' onClick="return false;">{{ _('add-to-bookmarks') }}</a>  |
-    <a title="{{ _('drag-to-bookmark-bar') }}" href='{{notemarks}}' onClick="return false;">{{ _('add-to-notes') }}</a>  |
+    <a title="{{ _('drag-to-bookmark-bar') }}" href="{{bookmarks}}" onClick="return false;">{{ _('add-to-bookmarks') }}</a>  |
+    <a title="{{ _('drag-to-bookmark-bar') }}" href="{{notemarks}}" onClick="return false;">{{ _('add-to-notes') }}</a>  |
     <a href="/setting">{{_('setting')}}</a> | 
     <a href="/user/logout">{{ _('logout') }}</a>
   {% else %}
