@@ -58,6 +58,8 @@ export default class extends Base {
     e.open(f, "_blank", "scrollbars=no,width=800,height=500,left=75,top=20,status=no,resizable=yes")
 } (window, document);`;
 
+  console.log('javascript:'+encodeURIComponent(notesUrl));
+
     this.assign('articleList', data);
     this.assign('pagerData', data);
     this.assign('isLogin', this.cookie('token') === this.config('token'));
