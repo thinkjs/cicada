@@ -51,17 +51,30 @@ export default class extends Base {
     e.open(f, "_blank", "scrollbars=no,width=800,height=500,left=75,top=20,status=no,resizable=yes")
 } (window, document);`;
 
+    let notesUrl = `void function(e, t, n, r, c, i, s, o, u) {
+    n = '/note/new', r = '' + (new Date).toLocaleString();
+    s = encodeURIComponent;
+    var f = "${this.config('protocol')}://${this.http.host}/article/add?title=" + s(r) + "&url=" + s(n);
+    e.open(f, "_blank", "scrollbars=no,width=800,height=500,left=75,top=20,status=no,resizable=yes")
+} (window, document);`;
+
     this.assign('articleList', data);
     this.assign('pagerData', data);
     this.assign('isLogin', this.cookie('token') === this.config('token'));
     this.assign('think', think);
     this.assign('bookmarks', 'javascript:'+encodeURIComponent(bookmarksUrl));
+    this.assign('notemarks', 'javascript:'+encodeURIComponent(notesUrl));
+
     return this.display();
   }
   /**
    * add page
    */
   addAction(){
+    let {url} = this.get();
+    if(url.startsWith('/note/')){
+      this.assign('isNote', true);
+    }
     return this.display();
   }
   /**
@@ -111,8 +124,21 @@ export default class extends Base {
     }
 
     record.id = result.id;
-    if(result.type === 'exist'){
-      await model.update(record);
+
+    let isNote = data.url.startsWith('/note/');
+
+    if(isNote){
+      let noteTag = this.locale('note-tag');
+      if(record.tag.indexOf(noteTag) < 0){
+        record.tag.push(noteTag);
+      }
+      record.url = '/note/' + record.id;
+    }
+
+    if(result.type === 'exist' || isNote){
+      console.log(record);
+      await model.update(record).catch((err)=>{console.log(err)})
+      console.log('done');
     }
 
     this.snapshot(record.id, data.url, data.content);
