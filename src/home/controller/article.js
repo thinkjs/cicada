@@ -58,8 +58,6 @@ export default class extends Base {
     e.open(f, "_blank", "scrollbars=no,width=800,height=500,left=75,top=20,status=no,resizable=yes")
 } (window, document);`;
 
-  console.log('javascript:'+encodeURIComponent(notesUrl));
-
     this.assign('articleList', data);
     this.assign('pagerData', data);
     this.assign('isLogin', this.cookie('token') === this.config('token'));
@@ -73,10 +71,16 @@ export default class extends Base {
    * add page
    */
   addAction(){
-    let {url} = this.get();
+    let {url, tag} = this.get();
     if(url.startsWith('/note/')){
       this.assign('isNote', true);
     }
+    if(!tag && url.startsWith('/note/new')){
+      this.assign('tag', this.locale('note-tag'));
+    }else{
+      this.assign('tag', tag);
+    }
+
     return this.display();
   }
   /**
@@ -130,17 +134,11 @@ export default class extends Base {
     let isNote = data.url.startsWith('/note/');
 
     if(isNote){
-      let noteTag = this.locale('note-tag');
-      if(record.tag.indexOf(noteTag) < 0){
-        record.tag.push(noteTag);
-      }
       record.url = '/note/' + record.id;
     }
 
     if(result.type === 'exist' || isNote){
-      console.log(record);
-      await model.update(record).catch((err)=>{console.log(err)})
-      console.log('done');
+      await model.update(record);
     }
 
     this.snapshot(record.id, data.url, data.content);
@@ -197,7 +195,7 @@ export default class extends Base {
     }
     let service = this.service('kindle');
     let kindleInstance = new service(this.config('kindle'));
-    console.log(this.config('kindle'));
+
     return kindleInstance.run(snap.content).then(this.success.bind(this)).catch(this.fail.bind(this));
   }
 }
