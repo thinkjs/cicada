@@ -4,14 +4,14 @@
   "version": "1.1.1",
   "scripts": {
     "start": "node www/development.js",
-    "compile": "babel --loose all --optional runtime --stage 0 --modules common src/ --out-dir app/ --retain-lines",
+    "compile": "babel --presets es2015,stage-1 --plugins transform-runtime src/ --out-dir app/",
     "watch-compile": "npm run compile -- --watch",
     "watch": "npm run watch-compile"
   },
   "dependencies": {
-    "babel": "5.8.21",
-    "babel-runtime": "5.6.17",
+    "babel-runtime": "^6.26.0",
     "iconv-lite": "^0.4.13",
+    "markdown": "^0.5.0",
     "moment": "^2.10.6",
     "mv": "^2.1.1",
     "node-readability": "^2.1.0",
@@ -20,7 +20,15 @@
     "request": "^2.67.0",
     "sqlite3": "^3.1.1",
     "thinkjs": "2.x.x",
-    "markdown": "^0.5.0",
     "unzip": "^0.1.11"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1"
   }
 }
