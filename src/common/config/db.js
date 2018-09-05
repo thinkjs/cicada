@@ -5,7 +5,7 @@
  */
 export default {
   type: 'sqlite',
-  name: 'cicada',
+  database: 'cicada',
   prefix: 'ci_',
   encoding: 'utf8',
   nums_per_page: 10,
