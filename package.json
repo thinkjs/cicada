@@ -18,7 +18,7 @@
     "nodemailer": "^1.10.0",
     "nunjucks": "^2.1.0",
     "request": "^2.67.0",
-    "sqlite3": "^3.1.1",
+    "sqlite3": "^4.0.6",
     "thinkjs": "2.x.x",
     "unzip": "^0.1.11"
   },
