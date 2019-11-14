@@ -43,7 +43,7 @@
       <a href="/article/snapshot?id={{ item.id }}&type=clean" target="_blank"> {{ _('concise-edition') }}</a>
       {% else %}
       <span class="generating">{{ _('generating') }}</span>
-      <script>setTimeout(location.reload, 5000)</script>
+      <script>if(!window.cicadaReloadFlag){window.cicadaReloadFlag = true;setTimeout(function(){location.reload()}, 5000)}</script>
       {% endif %}
       {% if isLogin %}
       | <a href="/article/edit?id={{item.id}}" target="_blank">{{_('edit')}}</a> | <a href="/article/delete?id={{item.id}}" onClick="return confirm('{{_('confirm-delete')}}')">{{_('delete')}}</a>
