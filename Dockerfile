@@ -12,5 +12,6 @@ COPY www ${WORKDIR}/www
 COPY sqlite ${WORKDIR}/sqlite
 
 RUN npm run compile
+RUN npm install html-pdf --registry=https://registry.npm.taobao.org
 
 CMD [ "node", "www/production.js" ]
