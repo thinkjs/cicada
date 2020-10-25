@@ -8,7 +8,7 @@ A favorite article collections application based on Node.js & [ThinkJS](https://
 
 ![](http://p0.qhimg.com/t016de9103f83648408.png)
 
-## install
+## 安装
 
 首先要安装 Node.js(>= 0.12.0) 的环境，然后通过下面的命令来安装 cicada：
 
@@ -20,6 +20,13 @@ npm install;
 
 注：Kindle 推送服务需要使用 html-pdf 模块，它依赖的 phantomJS 模块因为网络问题会导致安装很慢，所以我默认把这个模块从依赖中去掉了，有需要 Kindle 推送服务的可以自行 `npm install html-pdf` 安装。
 
+### Docker
+
+你也可以使用 Docker 进行安装使用
+
+```bash
+docker run -p 5678:5678 -v ./cicada.sqlite:/opt/cicada/sqlite/cicada.sqlite lizheming/cicada
+```
 
 
 ## 修改配置

@@ -20,6 +20,14 @@ npm install;
 
 Tip: If you want to use kinle push service, you need `npm install html-pdf` at the end.
 
+### Docker
+
+You can also run it by Docker:
+
+```bash
+docker run -p 5678:5678 -v ./cicada.sqlite:/opt/cicada/sqlite/cicada.sqlite lizheming/cicada
+```
+
 ## Configuration
 
 Modify `src/common/config/config.js`:
